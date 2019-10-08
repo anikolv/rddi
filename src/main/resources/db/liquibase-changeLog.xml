@@ -1,0 +1,53 @@
+<databaseChangeLog 
+  xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+  xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext
+   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd 
+   http://www.liquibase.org/xml/ns/dbchangelog 
+   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+     
+    <changeSet author="Alexander Nikolov" id="model-creation">
+	     <sql splitStatements="true">
+	     	CREATE SEQUENCE service_providers_id_seq INCREMENT BY 1 NO MINVALUE NO MAXVALUE START WITH 1 NO CYCLE;
+	     
+			CREATE TABLE service_providers(
+			   id int8 NOT NULL PRIMARY KEY DEFAULT nextval('service_providers_id_seq'),
+			   name VARCHAR (50),
+			   description VARCHAR (50),
+			   type VARCHAR (50),
+			   parent_business_organization VARCHAR (50),
+			   website VARCHAR (50),
+			   email VARCHAR (50),
+			   phone_number VARCHAR(50)
+			);
+			
+			CREATE SEQUENCE web_services_id_seq INCREMENT BY 1 NO MINVALUE NO MAXVALUE START WITH 1 NO CYCLE;
+			
+			CREATE TABLE web_services (
+			   id int8 NOT NULL PRIMARY KEY DEFAULT nextval('web_services_id_seq'),
+			   name VARCHAR (50),
+			   short_description VARCHAR(50),
+			   description VARCHAR (255),
+			   category VARCHAR(50),
+			   version int8, 
+			   openapi_contract text,
+			   documentation_url VARCHAR (50),
+			   type VARCHAR(50),
+			   http_status_code VARCHAR(50), 
+			   http_status_message VARCHAR (50),
+			   parent_web_service_id int8 REFERENCES web_services(id), 
+			   service_provider_id int8 REFERENCES service_providers(id)
+			);
+			
+			CREATE SEQUENCE web_services_comments_id_seq INCREMENT BY 1 NO MINVALUE NO MAXVALUE START WITH 1 NO CYCLE;
+			
+			CREATE TABLE web_services_comments(
+			   id int8 NOT NULL PRIMARY KEY DEFAULT nextval('web_services_id_seq'),
+			   author VARCHAR (50),
+			   comment text,
+			   web_service_id int8 REFERENCES web_services (id)
+			);
+	    </sql>
+    </changeSet>   
+</databaseChangeLog>
