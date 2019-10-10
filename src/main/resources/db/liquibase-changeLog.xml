@@ -49,5 +49,18 @@
 			   web_service_id int8 REFERENCES web_services (id)
 			);
 	    </sql>
-    </changeSet>   
+    </changeSet> 
+    
+     <changeSet author="Alexander Nikolov" id="create-model-temporal-aspects">
+	     <sql splitStatements="true">
+	    	ALTER TABLE service_providers
+			ADD COLUMN created_at TIMESTAMP;
+			
+			ALTER TABLE web_services
+			ADD COLUMN created_at TIMESTAMP;
+			
+			ALTER TABLE web_services_comments
+			ADD COLUMN created_at TIMESTAMP;
+	    </sql>
+    </changeSet>  
 </databaseChangeLog>
