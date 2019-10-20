@@ -15,3 +15,9 @@
 	margin: 0;
 	background-color: white;
 }
+
+.custom-button {
+    background-color: #3cc1ac;
+    border-color: #3cc1ac;
+    color: black;
+}
