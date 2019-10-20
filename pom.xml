@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.rddi</groupId>
-	<artifactId>register-app</artifactId>
+	<artifactId>resthub</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>register-app</name>
-	<description>REST Description, Discovery and Integration (RDDI)</description>
+	<name>resthub</name>
+	<description>Resthub - hub for RESTFul web services</description>
 
 	<properties>
 		<java.version>1.8</java.version>
@@ -40,6 +40,10 @@
 			<groupId>de.codecentric</groupId>
 			<artifactId>spring-boot-admin-starter-server</artifactId>
 		</dependency>
+		<dependency>
+		    <groupId>org.springframework.boot</groupId>
+		    <artifactId>spring-boot-devtools</artifactId>
+		</dependency>
 
 		<dependency>
 			<groupId>org.postgresql</groupId>
@@ -60,6 +64,24 @@
     		<groupId>org.liquibase</groupId>
      		<artifactId>liquibase-core</artifactId>
 		</dependency>
+		
+		<!-- Web dependencies -->
+		
+		<dependency>
+		    <groupId>org.webjars</groupId>
+		    <artifactId>bootstrap</artifactId>
+		    <version>4.3.1</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.webjars</groupId>
+		    <artifactId>jquery</artifactId>
+		    <version>3.4.0</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.webjars</groupId>
+		    <artifactId>font-awesome</artifactId>
+		    <version>5.8.1</version>
+		</dependency>
 	</dependencies>
 
 	<dependencyManagement>
@@ -79,8 +101,19 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+        			<executable>true</executable>
+    			</configuration>
 			</plugin>
 		</plugins>
 	</build>
+	
+	<organization>
+		<name>Sofia university &quot;St Kliment Ohridski&quot;</name>
+	</organization>
+	<scm>
+		<url>https://github.com/anikolv/rddi</url>
+		<developerConnection>Alexander Nikolov</developerConnection>
+	</scm>
 
 </project>

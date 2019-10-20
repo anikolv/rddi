@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<link rel="shortcut icon" type="image/jpg" href="/images/FullColor_IconOnly_1024x1024_72dpi.jpg"/>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		
+		<title>RestHub</title>
+		
+		<link rel="stylesheet" href="webjars/bootstrap/4.3.1/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="webjars/font-awesome/5.8.1/css/all.css" />
+		<link rel="stylesheet" href="css/styles.css" />
+	</head>
+	<body>
+		<div class="jumbotron d-flex align-items-center min-vh-100 custom-layout">
+		  <div class="container text-center">
+		   	<img src="images/FullColor_1024x1024_72dpi.jpg" class="img-fluid langing-logo">
+			
+			<form>
+				<div class="input-group mb-4 border rounded-pill p-1">
+		            <div class="input-group-prepend border-0">
+		              <button id="button-addon4" type="button" class="btn btn-link text-info"><i class="fa fa-search"></i></button>
+		            </div>
+		            <input type="search" placeholder="Search apis..." aria-describedby="button-addon4" class="form-control bg-none border-0">		            
+	          </div>
+			</form>
+		  </div>
+		</div>
+		
+            				
+		<script type="text/javascript" src="webjars/jquery/3.4.0/jquery.min.js"></script>
+		<script type="text/javascript" src="webjars/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+		
+		<script>
+			$(document).ready(function() {
+				$('.mdb-select').materialSelect();
+			});
+		</script>
+	</body>

@@ -63,4 +63,19 @@
 			ADD COLUMN created_at TIMESTAMP;
 	    </sql>
     </changeSet>  
+    
+    <changeSet author="Alexander Nikolov" id="change-contract-to-url">
+	     <sql splitStatements="true">
+			ALTER TABLE web_services
+			DROP COLUMN openapi_contract,
+			ADD COLUMN openapi_contract_url VARCHAR (255);
+	    </sql>
+    </changeSet>
+    
+    <changeSet author="Alexander Nikolov" id="add-service-provider-icon">
+	     <sql splitStatements="true">
+			ALTER TABLE service_providers
+			ADD COLUMN icon_url VARCHAR (255);
+	    </sql>
+    </changeSet>
 </databaseChangeLog>

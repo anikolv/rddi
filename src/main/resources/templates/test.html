@@ -1,0 +1,25 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+	<script type="module" src="https://unpkg.com/rapidoc/dist/rapidoc-min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Spring Boot Thymeleaf Hello World Example</title>
+</head>
+
+<body>
+	  <rapi-doc id="rapidoc"> 
+	  </rapi-doc>
+	  
+	  
+	   <script>
+		      document.addEventListener('DOMContentLoaded', (event) => {
+		        let docEl = document.getElementById("rapidoc");
+		        let strSpec = "[[${contract}]]";
+		        let objSpec = JSON.parse(strSpec);
+		        docEl.loadSpec(objSpec);
+		      })
+		</script>
+</body>
+</html>

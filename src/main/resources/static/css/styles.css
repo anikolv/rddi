@@ -1,0 +1,17 @@
+@charset "ISO-8859-1";
+
+.langing-logo {
+	max-height: 200px;
+	margin-bottom: 60px;
+	border-color: black;
+	border-style: inset;
+}
+
+.form-control:focus {
+  box-shadow: none;
+}
+
+.custom-layout {
+	margin: 0;
+	background-color: white;
+}

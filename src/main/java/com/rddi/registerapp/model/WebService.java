@@ -53,7 +53,7 @@ public class WebService {
 	@Column(name = "version")
 	private Long version;
 	
-	@Column(name = "openapi_contract")
+	@Column(name = "openapi_contract_url")
 	private String openApiContract;
 	
 	@Column(name = "documentation_url")

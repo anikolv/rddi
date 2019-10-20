@@ -53,6 +53,9 @@ public class ServiceProvider {
 	@Column(name = "email")
 	private String email;
 	
+	@Column(name = "icon_url")
+	private String iconUrl;
+	
 	@Column(name = "phone_number")
 	private String phoneNumber;
 	
