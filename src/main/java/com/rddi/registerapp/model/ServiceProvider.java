@@ -26,7 +26,7 @@ import com.rddi.registerapp.model.enums.ServiceProviderType;
 
 import lombok.Data;
 
-@Data @Entity
+@Entity
 @Table(name = "service_providers")
 public class ServiceProvider {
 	
@@ -67,5 +67,92 @@ public class ServiceProvider {
 	@JsonManagedReference
 	@OneToMany(mappedBy = "serviceProvider", orphanRemoval = true, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private Set<WebService> webServices = new LinkedHashSet<WebService>();
-	
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public ServiceProviderType getType() {
+		return type;
+	}
+
+	public void setType(ServiceProviderType type) {
+		this.type = type;
+	}
+
+	public String getParentBusinessOrganization() {
+		return parentBusinessOrganization;
+	}
+
+	public void setParentBusinessOrganization(String parentBusinessOrganization) {
+		this.parentBusinessOrganization = parentBusinessOrganization;
+	}
+
+	public String getWebsite() {
+		return website;
+	}
+
+	public void setWebsite(String website) {
+		this.website = website;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getIconUrl() {
+		return iconUrl;
+	}
+
+	public void setIconUrl(String iconUrl) {
+		this.iconUrl = iconUrl;
+	}
+
+	public String getPhoneNumber() {
+		return phoneNumber;
+	}
+
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
+	}
+
+	public Date getCreatedAt() {
+		return createdAt;
+	}
+
+	public void setCreatedAt(Date createdAt) {
+		this.createdAt = createdAt;
+	}
+
+	public Set<WebService> getWebServices() {
+		return webServices;
+	}
+
+	public void setWebServices(Set<WebService> webServices) {
+		this.webServices = webServices;
+	}	
 }

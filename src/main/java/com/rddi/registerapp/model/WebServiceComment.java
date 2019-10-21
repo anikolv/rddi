@@ -19,7 +19,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import lombok.Data;
 
-@Data @Entity
+@Entity
 @Table(name = "web_services_comments")
 public class WebServiceComment {
 	
@@ -43,4 +43,43 @@ public class WebServiceComment {
 	@Column(name = "created_at")
 	private Date createdAt;
 
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getAuthor() {
+		return author;
+	}
+
+	public void setAuthor(String author) {
+		this.author = author;
+	}
+
+	public String getComment() {
+		return comment;
+	}
+
+	public void setComment(String comment) {
+		this.comment = comment;
+	}
+
+	public WebService getWebService() {
+		return webService;
+	}
+
+	public void setWebService(WebService webService) {
+		this.webService = webService;
+	}
+
+	public Date getCreatedAt() {
+		return createdAt;
+	}
+
+	public void setCreatedAt(Date createdAt) {
+		this.createdAt = createdAt;
+	}
 }

@@ -78,4 +78,18 @@
 			ADD COLUMN icon_url VARCHAR (255);
 	    </sql>
     </changeSet>
+    
+    <changeSet author="Alexander Nikolov" id="change-apiversion-to-varchar">
+	     <sql splitStatements="true">
+			ALTER TABLE web_services
+			ALTER COLUMN version TYPE VARCHAR(50);
+	    </sql>
+    </changeSet>
+    
+    <changeSet author="Alexander Nikolov" id="increase-short-descrition-limit">
+	     <sql splitStatements="true">
+			ALTER TABLE web_services
+			ALTER COLUMN short_description TYPE VARCHAR(255);
+	    </sql>
+    </changeSet>
 </databaseChangeLog>

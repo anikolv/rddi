@@ -29,7 +29,7 @@ import com.rddi.registerapp.model.enums.WebServiceType;
 
 import lombok.Data;
 
-@Data @Entity
+@Entity
 @Table(name = "web_services")
 public class WebService {
 	
@@ -51,7 +51,7 @@ public class WebService {
 	private WebServiceCategory category;
 	
 	@Column(name = "version")
-	private Long version;
+	private String version;
 	
 	@Column(name = "openapi_contract_url")
 	private String openApiContract;
@@ -85,4 +85,128 @@ public class WebService {
 	@OneToMany(mappedBy = "webService", orphanRemoval = true, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private Set<WebServiceComment> comments = new LinkedHashSet<WebServiceComment>();
 
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getShortDescription() {
+		return shortDescription;
+	}
+
+	public void setShortDescription(String shortDescription) {
+		this.shortDescription = shortDescription;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public WebServiceCategory getCategory() {
+		return category;
+	}
+
+	public void setCategory(WebServiceCategory category) {
+		this.category = category;
+	}
+
+	public String getVersion() {
+		return version;
+	}
+
+	public void setVersion(String version) {
+		this.version = version;
+	}
+
+	public String getOpenApiContract() {
+		return openApiContract;
+	}
+
+	public void setOpenApiContract(String openApiContract) {
+		this.openApiContract = openApiContract;
+	}
+
+	public String getDocumentationUrl() {
+		return documentationUrl;
+	}
+
+	public void setDocumentationUrl(String documentationUrl) {
+		this.documentationUrl = documentationUrl;
+	}
+
+	public WebServiceType getType() {
+		return type;
+	}
+
+	public void setType(WebServiceType type) {
+		this.type = type;
+	}
+
+	public String getHttpStatusCode() {
+		return httpStatusCode;
+	}
+
+	public void setHttpStatusCode(String httpStatusCode) {
+		this.httpStatusCode = httpStatusCode;
+	}
+
+	public String getHttpStatusMessage() {
+		return httpStatusMessage;
+	}
+
+	public void setHttpStatusMessage(String httpStatusMessage) {
+		this.httpStatusMessage = httpStatusMessage;
+	}
+
+	public WebService getParentWebService() {
+		return parentWebService;
+	}
+
+	public void setParentWebService(WebService parentWebService) {
+		this.parentWebService = parentWebService;
+	}
+
+	public ServiceProvider getServiceProvider() {
+		return serviceProvider;
+	}
+
+	public void setServiceProvider(ServiceProvider serviceProvider) {
+		this.serviceProvider = serviceProvider;
+	}
+
+	public Date getCreatedAt() {
+		return createdAt;
+	}
+
+	public void setCreatedAt(Date createdAt) {
+		this.createdAt = createdAt;
+	}
+
+	public Set<WebServiceComment> getComments() {
+		return comments;
+	}
+
+	public void setComments(Set<WebServiceComment> comments) {
+		this.comments = comments;
+	}
+	
+	public void addServiceProvider(ServiceProvider serviceProvider) {
+		this.serviceProvider = serviceProvider;
+		serviceProvider.getWebServices().add(this);
+	}
 }

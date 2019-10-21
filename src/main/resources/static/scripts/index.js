@@ -5,14 +5,19 @@ $( document ).ready(function() {
 	   initSecondModalForm();
 	 });
    
-   $( ".btn-cancel, .close" ).click(function() {
+   $( ".btn-cancel, .close, .btn-back" ).click(function() {
 	   initFirstModalForm();
+	 });
+   
+   $( ".btn-add-api" ).click(function() {
+	   $( ".add-api-form" ).submit();
 	 });
 });
 
 function initFirstModalForm() {
 	   $(".web-service-form").hide();
 	   $(".btn-add-api").hide();
+	   $(".btn-back").hide();
 	   $(".modal-title").text("Service provider information");
 	   
 	   $(".service-provider-form").show();
@@ -25,5 +30,6 @@ function initSecondModalForm() {
 	   
 	   $(".web-service-form").show();
 	   $(".btn-add-api").show();
+	   $(".btn-back").show();
 	   $(".modal-title").text("Web API information");
 	 }
