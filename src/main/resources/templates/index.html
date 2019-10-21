@@ -28,33 +28,106 @@
 			<a href="#" class="btn custom-button btn-lg active" role="button" aria-pressed="true" data-toggle="modal" data-target="#add-api-modal">Add API</a>	
 			
 			<!-- Modal -->
-			<div class="modal fade" id="add-api-modal" tabindex="-1" role="dialog" aria-labelledby="add-api-modal-label" aria-hidden="true">
-			  <div class="modal-dialog" role="document">
+			<div class="modal fade bd-example-modal-lg" id="add-api-modal" tabindex="-1" role="dialog" aria-labelledby="add-api-modal-label" aria-hidden="true">
+			  <div class="modal-dialog modal-lg" role="document">
 			    <div class="modal-content">
 			      <div class="modal-header">
-			        <h3 class="modal-title" id="add-api-modal-label">Fill-in API information</h3>
+			        <h3 class="modal-title" id="add-api-modal-label"></h3>
 			        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 			          <span aria-hidden="true">&times;</span>
 			        </button>
 			      </div>
 			      <div class="modal-body">
-			        <h5>Service provider details</h5>
 				        <form>
-						  <div class="form-group">
-						    <label for="serviceProviderName">Name</label>
-						    <input type="text" class="form-control" id="serviceProviderName" aria-describedby="serviceProviderNameHelp" placeholder="Service provider name">
-						    <small id="serviceProviderNameHelp" class="form-text text-muted">This is the service provider name (ex: European Central Bank)</small>
-						  </div>
-						  <div class="form-group">
-						    <label for="serviceProviderDesc">Description</label>
-						    <input type="text" class="form-control" id="serviceProviderDesc" aria-describedby="serviceProviderDescHelp" placeholder="Service provider description">
-						    <small id="serviceProviderDescHelp" class="form-text text-muted">This is service provider short description (ex: The European Central Bank (ECB) is the central bank for the euro and administers)</small>
-						  </div>
+				        	<!-- Service provider section -->
+				        	
+					        <div class="service-provider-form">
+					          
+							  <div class="form-group">
+							    <label for="serviceProviderName">Name</label>
+							    <input type="text" class="form-control" id="serviceProviderName" aria-describedby="serviceProviderNameHelp" placeholder="European Central Bank">
+							    <small id="serviceProviderNameHelp" class="form-text text-muted">This is the service provider name</small>
+							  </div>
+							  <div class="form-group">
+							    <label for="serviceProviderDesc">Description</label>
+							    <input type="text" class="form-control" id="serviceProviderDesc" aria-describedby="serviceProviderDescHelp" placeholder="European Central Bank IT HUB services">
+							    <small id="serviceProviderDescHelp" class="form-text text-muted">This is service provider short description</small>
+							  </div>
+							  <div class="form-group">
+							    <label for="serviceProviderType">Type</label>
+							    <select class="form-control" id="serviceProviderType" aria-describedby="serviceProviderTypeHelp">
+							    	<option th:each="type : ${serviceProviderTypes}" th:text="${type.name}"></option>
+							    </select>
+							    <small id="serviceProviderTypeHelp" class="form-text text-muted">This is the type of the service provider</small>
+							  </div>
+							  <div class="form-group">
+							    <label for="serviceProviderWebsite">Website</label>
+							    <input type="text" class="form-control" id="serviceProviderWebsite" aria-describedby="serviceProviderWebsitecHelp" placeholder="https://www.ecb.europa.eu/home/html/index.en.html">
+							    <small id="serviceProviderWebsitecHelp" class="form-text text-muted">Providing your website makes your API more reliable</small>
+							  </div>
+							  <div class="form-group">
+							    <label for="serviceProviderIcon">Icon</label>
+							    <input type="text" class="form-control" id="serviceProviderIcon" aria-describedby="serviceProviderIconHelp" placeholder="https://avatars0.githubusercontent.com/u/7658037?s=400&v=4">
+							    <small id="serviceProviderIconHelp" class="form-text text-muted">Url for your company logo. This helps making your API more recognizable</small>
+							  </div>
+					        </div>
+					        
+					        <!-- Web service section -->
+					        
+					        <div class="web-service-form">
+							  
+							  <div class="form-group">
+							    <label for="webApiName">Name</label>
+							    <input type="text" class="form-control" id="webApiName" aria-describedby="webApiNameHelp" placeholder="Currency conversion API">
+							    <small id="webApiNameHelp" class="form-text text-muted">This is the name of your API</small>
+							  </div>
+							  <div class="form-group">
+							    <label for="webApiShortDesc">Short description</label>
+							    <input type="text" class="form-control" id="webApiShortDesc" aria-describedby="webApiShortDescHelp" placeholder="Exchange rates API for 30+ currencies">
+							    <small id="webApiShortDescHelp" class="form-text text-muted">This is short description of your API</small>
+							  </div>
+							  <div class="form-group">
+							    <label for="webApiDesc">Description</label>
+							    <input type="text" class="form-control" id="webApiDesc" aria-describedby="webApiDescHelp" placeholder="More detailed description">
+							    <small id="webApiDescHelp" class="form-text text-muted">This is detailed description of your API</small>
+							  </div>
+							  <div class="form-group">
+							    <label for="webApiCategory">Category</label>
+							    <select class="form-control" id="webApiCategory" aria-describedby="webApiCategoryHelp">
+							    	<option th:each="category : ${webServiceCategories}" th:text="${category.name}"></option>
+							    </select>
+							    <small id="webApiCategoryHelp" class="form-text text-muted">This is the domain in which your API operates</small>
+							  </div>
+							  <div class="form-group">
+							    <label for="webApiType">Type</label>
+							    <select class="form-control" id="webApiType" aria-describedby="webApiTypeHelp">
+							    	<option th:each="type : ${webServiceTypes}" th:text="${type.name}"></option>
+							    </select>
+							    <small id="webApiTypeHelp" class="form-text text-muted">This is the type of the service provider</small>
+							  </div>
+							  <div class="form-group">
+							    <label for="webApiVersion">Version</label>
+							    <input type="text" class="form-control" id="webApiVersion" aria-describedby="webApiVersionHelp" placeholder="1.0.0">
+							    <small id="webApiVersionHelp" class="form-text text-muted">This is the version of your API</small>
+							  </div>
+							  <div class="form-group">
+							    <label for="webApiVersionDoc">Reference documentation</label>
+							    <input type="text" class="form-control" id="webApiVersionDoc" aria-describedby="webApiVersionDocHelp" placeholder="https://developers.google.com/docs/api/reference/rest">
+							    <small id="webApiVersionDocHelp" class="form-text text-muted">This is URL to your API reference documentation</small>
+							  </div>
+							  <div class="form-group">
+							    <label for="webApiSpec">Spec URL</label>
+							    <input type="text" class="form-control" id="webApiSpec" aria-describedby="webApiSpecHelp" placeholder="https://petstore.swagger.io/v2/swagger.json">
+							    <small id="webApiSpecHelp" class="form-text text-muted">This is URL to your OpenAPI specification</small>
+							  </div>
+					        </div>
+					        				
 						</form>
 			      </div>
 			      <div class="modal-footer">
-			        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-			        <button type="button" class="btn btn-primary">Add API</button>
+			        <button type="button" class="btn btn-secondary btn-cancel" data-dismiss="modal">Cancel</button>
+			        <button type="button" class="btn custom-button btn-next">Next</button>
+			        <button type="button" class="btn custom-button btn-add-api">Add API</button>
 			      </div>
 			    </div>
 			  </div>
@@ -66,4 +139,5 @@
             				
 		<script type="text/javascript" src="webjars/jquery/3.4.0/jquery.min.js"></script>
 		<script type="text/javascript" src="webjars/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="scripts/index.js"></script>
 	</body>
