@@ -15,35 +15,35 @@
 		  <div class="container text-center">
 		   	<img src="images/FullColor_1024x1024_72dpi.jpg" class="img-fluid langing-logo bottom-margin">
 			
-			<form class="bottom-margin">
+			<form class="bottom-margin search-api-form" th:object="${webServiceSearchForm}" th:action="@{/search}"  method="post">
 				<div class="input-group mb-4 border rounded-pill p-1">
 		            <div class="input-group-prepend border-0">
 		              <button id="button-addon4" type="button" class="btn btn-link text-info"><i class="fa fa-search"></i></button>
 		            </div>
-		            <input type="search" placeholder="Search apis..." aria-describedby="button-addon4" class="form-control bg-none border-0">
+		            <input type="search" th:field="*{searchTerm}" placeholder="Search apis..." aria-describedby="button-addon4" class="form-control bg-none border-0">
 	            </div>
 	          
 	            <div class="container">
 		          <div class="row">
 		          	<div class="col-md-4">
-		          		<label for="categoryFilter">Api category</label>
-						 <select class="form-control" id="categoryFilter" aria-describedby="categoryFilterHelp">
+		          		<label for="apiCategory">Api category</label>
+						 <select class="form-control" th:field="*{apiCategory}" aria-describedby="categoryFilterHelp">
 							<option th:each="category : ${webServiceCategories}" th:text="${category.name}" th:value="${category}"></option>
 						</select>
 						<small id="categoryFilterHelp" class="form-text text-muted">Specify API domain</small>
 		          	</div>
 		          	
 		          	<div class="col-md-4">
-		          		<label for="typeFilter">Api Deployment Type</label>
-						 <select class="form-control" id="typeFilter" aria-describedby="typeFilterHelp">
+		          		<label for="apiType">Api Deployment Type</label>
+						 <select class="form-control" th:field="*{apiType}" aria-describedby="typeFilterHelp">
 							<option th:each="type : ${webServiceTypes}" th:text="${type.name}" th:value="${type}"></option>
 						</select>
 						<small id="typeFilterHelp" class="form-text text-muted">Specify API type</small>
 		          	</div>
 		          	
 		          	<div class="col-md-4">
-		          		<label for="typeFilter">Service provider type</label>
-						 <select class="form-control" id="typeFilter" aria-describedby="typeFilterHelp">
+		          		<label for="serviceProviderType">Service provider type</label>
+						 <select class="form-control" th:field="*{serviceProviderType}" aria-describedby="typeFilterHelp">
 							<option th:each="type : ${serviceProviderTypes}" th:text="${type.name}" th:value="${type}"></option>
 						</select>
 						<small id="typeFilterHelp" class="form-text text-muted">Specify provider type</small>
@@ -52,9 +52,20 @@
 				</div>
 			</form>
 			
-			<div>
-				<a href="#" class="btn custom-button btn-lg active" role="button" aria-pressed="true">Search</a>	
+			<div class="bottom-margin">
+				<a href="#" class="btn custom-button btn-lg active btn-search" role="button" aria-pressed="true">Search</a>	
 				<a href="#" class="btn custom-button btn-lg active" role="button" aria-pressed="true" data-toggle="modal" data-target="#add-api-modal">Add API</a>	
+			</div>
+			
+			<div class="card-columns" th:if="${webServicesList != null and not #lists.isEmpty(webServicesList)}">
+				<div class="card" style="width: 17rem;" th:each="webService : ${webServicesList}">
+				  	<img class="card-img-top" th:attr="src=${webService.serviceProvider.iconUrl}"  alt="Card image cap">
+				  	<div class="card-body">
+				    	<h5 class="card-title" th:text="${webService.name}"></h5>
+				    	<p class="card-text" th:text="${webService.description}">.</p>
+				    	<a href="#" class="btn btn-primary custom-button">Check it out</a>
+			  		</div>
+				</div>
 			</div>
 			
 			<!-- Modal -->

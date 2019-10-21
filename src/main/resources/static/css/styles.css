@@ -24,3 +24,7 @@
 .bottom-margin {
 	margin-bottom: 60px;
 }
+
+.card-columns {
+	column-count: 3;
+}	

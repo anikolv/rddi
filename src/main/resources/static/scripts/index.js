@@ -12,6 +12,10 @@ $( document ).ready(function() {
    $( ".btn-add-api" ).click(function() {
 	   $( ".add-api-form" ).submit();
 	 });
+   
+   $( ".btn-search" ).click(function() {
+	   $( ".search-api-form" ).submit();
+	 });
 });
 
 function initFirstModalForm() {
