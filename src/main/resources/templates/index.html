@@ -13,19 +13,49 @@
 	<body>
 		<div class="jumbotron d-flex align-items-center min-vh-100 custom-layout">
 		  <div class="container text-center">
-		   	<img src="images/FullColor_1024x1024_72dpi.jpg" class="img-fluid langing-logo">
+		   	<img src="images/FullColor_1024x1024_72dpi.jpg" class="img-fluid langing-logo bottom-margin">
 			
-			<form>
+			<form class="bottom-margin">
 				<div class="input-group mb-4 border rounded-pill p-1">
 		            <div class="input-group-prepend border-0">
 		              <button id="button-addon4" type="button" class="btn btn-link text-info"><i class="fa fa-search"></i></button>
 		            </div>
 		            <input type="search" placeholder="Search apis..." aria-describedby="button-addon4" class="form-control bg-none border-0">
-	          </div>
+	            </div>
+	          
+	            <div class="container">
+		          <div class="row">
+		          	<div class="col-md-4">
+		          		<label for="categoryFilter">Api category</label>
+						 <select class="form-control" id="categoryFilter" aria-describedby="categoryFilterHelp">
+							<option th:each="category : ${webServiceCategories}" th:text="${category.name}" th:value="${category}"></option>
+						</select>
+						<small id="categoryFilterHelp" class="form-text text-muted">Specify API domain</small>
+		          	</div>
+		          	
+		          	<div class="col-md-4">
+		          		<label for="typeFilter">Api Deployment Type</label>
+						 <select class="form-control" id="typeFilter" aria-describedby="typeFilterHelp">
+							<option th:each="type : ${webServiceTypes}" th:text="${type.name}" th:value="${type}"></option>
+						</select>
+						<small id="typeFilterHelp" class="form-text text-muted">Specify API type</small>
+		          	</div>
+		          	
+		          	<div class="col-md-4">
+		          		<label for="typeFilter">Service provider type</label>
+						 <select class="form-control" id="typeFilter" aria-describedby="typeFilterHelp">
+							<option th:each="type : ${serviceProviderTypes}" th:text="${type.name}" th:value="${type}"></option>
+						</select>
+						<small id="typeFilterHelp" class="form-text text-muted">Specify provider type</small>
+		          	</div>
+		          </div>
+				</div>
 			</form>
 			
-			<a href="#" class="btn custom-button btn-lg active" role="button" aria-pressed="true">Search</a>	
-			<a href="#" class="btn custom-button btn-lg active" role="button" aria-pressed="true" data-toggle="modal" data-target="#add-api-modal">Add API</a>	
+			<div>
+				<a href="#" class="btn custom-button btn-lg active" role="button" aria-pressed="true">Search</a>	
+				<a href="#" class="btn custom-button btn-lg active" role="button" aria-pressed="true" data-toggle="modal" data-target="#add-api-modal">Add API</a>	
+			</div>
 			
 			<!-- Modal -->
 			<div class="modal fade bd-example-modal-lg" id="add-api-modal" tabindex="-1" role="dialog" aria-labelledby="add-api-modal-label" aria-hidden="true">

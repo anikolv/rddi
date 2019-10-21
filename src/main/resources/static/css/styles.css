@@ -2,7 +2,6 @@
 
 .langing-logo {
 	max-height: 200px;
-	margin-bottom: 60px;
 	border-color: black;
 	border-style: inset;
 }
@@ -20,4 +19,8 @@
     background-color: #3cc1ac;
     border-color: #3cc1ac;
     color: black;
+}
+
+.bottom-margin {
+	margin-bottom: 60px;
 }
