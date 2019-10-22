@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.rddi.registerapp.form.WebServiceForm;
@@ -42,6 +43,14 @@ public class HomeController {
 		model.addAttribute("webServicesList", webServices);
 		
 		return "index";
+	}
+	
+	@GetMapping(value="/api/details/{webServiceId}")
+	public String apiDetails(@PathVariable("webServiceId") Long webServiceId, Model model) {
+		WebService webService = webServiceRepository.findById(webServiceId).orElse(null);
+		model.addAttribute("webService", webService);
+		
+		return "api-details";
 	}
 	
 	private void initModel(Model model) {

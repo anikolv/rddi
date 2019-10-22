@@ -92,4 +92,11 @@
 			ALTER COLUMN short_description TYPE VARCHAR(255);
 	    </sql>
     </changeSet>
+    
+    <changeSet author="Alexander Nikolov" id="increase-descrition-limit">
+	     <sql splitStatements="true">
+			ALTER TABLE service_providers
+			ALTER COLUMN description TYPE TEXT;
+	    </sql>
+    </changeSet>
 </databaseChangeLog>

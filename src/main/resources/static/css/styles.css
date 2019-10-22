@@ -6,6 +6,11 @@
 	border-style: inset;
 }
 
+.icon-small {
+	width: 100px;
+	height: 100px;
+}
+
 .form-control:focus {
   box-shadow: none;
 }

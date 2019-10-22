@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<link rel="shortcut icon" type="image/jpg" href="/images/FullColor_IconOnly_1024x1024_72dpi.jpg"/>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		
+		<title>RestHub - browse and share RESTFul web apis</title>
+		
+		<link rel="stylesheet" href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="/webjars/font-awesome/5.8.1/css/all.css" />
+		<link rel="stylesheet" href="/css/styles.css" />
+	</head>
+	<body>
+		<div class="jumbotron d-flex align-items-center min-vh-100 custom-layout">
+		  <div class="container text-center">
+		  
+		  
+		  <a href="/">
+		  	<img src="/images/FullColor_TextOnly_1024x1024_72dpi.jpg" class="img-fluid langing-logo bottom-margin">
+		  </a>
+		   	
+		   	<div class="card text-center">
+			  <div class="card-header">
+			    <ul class="nav nav-tabs card-header-tabs">
+			      <li class="nav-item">
+			        <a class="nav-link info-navbar active" href="#">General information</a>
+			      </li>
+			      <li class="nav-item">
+			        <a class="nav-link play-navbar" href="#">Play with it</a>
+			      </li>
+			      <li class="nav-item">
+			        <a class="nav-link integrate-navbar" href="#" tabindex="-1">Integrate it</a>
+			      </li>
+			      <li class="nav-item">
+			        <a class="nav-link discuss-navbar" href="#" tabindex="-1">Discuss it</a>
+			      </li>
+			    </ul>
+			  </div>
+			  <div class="card-body">
+			  		<div class="content-panel info-panel">
+					  	<img class="icon-small bottom-margin" th:attr="src=${webService.serviceProvider.iconUrl}"  alt="Card image cap">
+					    <h3 class="card-title" th:text="${webService.name + ', version ' + webService.version}"></h3>
+					    <p class="card-text" th:text="${webService.description}"></p>
+					    <p class="card-text" th:text="${'Type: ' + webService.type.name}"></p>
+					    <p class="card-text" th:text="${'Domain: ' + webService.category.name}"></p>
+					    <p class="card-text">
+					    	Reference documenation:
+					    	<a th:text="${webService.documentationUrl}" th:attr="href=${webService.documentationUrl}"></a>
+					    </p>
+					    
+					    <h5 class="card-title">Powered by</h5>
+					    <p class="card-text" th:text="${webService.serviceProvider.name}"></p>
+					    <p class="card-text" th:text="${webService.serviceProvider.description}"></p>
+					    <p class="card-text" th:text="${webService.serviceProvider.type.name}"></p>			    
+					    <a th:attr="href=${webService.serviceProvider.website}" class="btn btn-primary custom-button">Visit website</a>
+				  	</div>
+				  	<div class="content-panel play-panel" style="display:none;">
+				  		<rapi-doc spec-url="https://api.apis.guru/v2/specs/bitbucket.org/2.0/swagger.json"></rapi-doc>
+				  	</div>
+			  </div>
+			</div>
+			
+		  </div>
+		</div>
+		
+            				
+		<script type="text/javascript" src="/webjars/jquery/3.4.0/jquery.min.js"></script>
+		<script type="text/javascript" src="/webjars/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="/scripts/api-details.js"></script>
+		<script type="module" src="https://unpkg.com/rapidoc/dist/rapidoc-min.js"></script>
+	</body>
