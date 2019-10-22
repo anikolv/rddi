@@ -11,5 +11,7 @@ public interface WebServiceManagement {
 
 	public List<WebService> searchWebServices(String searchTerm, WebServiceType webServiceType,
 			WebServiceCategory webServiceCategory, ServiceProviderType serviceProviderType);
+	
+	public byte[] generateClient(Long webServiceId, String clientType);
 
 }

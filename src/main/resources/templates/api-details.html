@@ -26,6 +26,9 @@
 			        <a class="nav-link info-navbar active" href="#">General information</a>
 			      </li>
 			      <li class="nav-item">
+			        <a class="nav-link inspect-navbar" href="#" tabindex="-1">Inspect it</a>
+			      </li>
+			      <li class="nav-item">
 			        <a class="nav-link play-navbar" href="#">Play with it</a>
 			      </li>
 			      <li class="nav-item">
@@ -37,6 +40,7 @@
 			    </ul>
 			  </div>
 			  <div class="card-body">
+			  		<!-- General information -->
 			  		<div class="content-panel info-panel">
 					  	<img class="icon-small bottom-margin" th:attr="src=${webService.serviceProvider.iconUrl}"  alt="Card image cap">
 					    <h3 class="card-title" th:text="${webService.name + ', version ' + webService.version}"></h3>
@@ -53,9 +57,37 @@
 					    <p class="card-text" th:text="${webService.serviceProvider.description}"></p>
 					    <p class="card-text" th:text="${webService.serviceProvider.type.name}"></p>			    
 					    <a th:attr="href=${webService.serviceProvider.website}" class="btn btn-primary custom-button">Visit website</a>
+					    <a href="/client/generate/3/java" class="btn btn-primary custom-button">Test</a>
 				  	</div>
+				  	
+				  	<!-- Play with it -->
 				  	<div class="content-panel play-panel" style="display:none;">
-				  		<rapi-doc spec-url="https://api.apis.guru/v2/specs/bitbucket.org/2.0/swagger.json"></rapi-doc>
+				  		<rapi-doc primary-color="#3cc1ac" th:attr="spec-url=${webService.openApiContract}">
+				  			<img class="icon-smaller" slot="logo" th:attr="src=${webService.serviceProvider.iconUrl}"/>
+				  		</rapi-doc>
+				  	</div>
+				  	
+				  	<!-- Inspect it -->
+				  	<div class="content-panel inspect-panel" style="display:none;">
+				  		
+				  	</div>
+				  	
+				  	<!-- Integrate it -->
+				  	<div class="content-panel integrate-panel" style="display:none;">
+				  		<h5 class="card-title">Generate your SDK client</h5>
+				  		<form th:object="${clientSdkGenerationForm}" th:action="@{/client/generate/} + ${webService.id}" class="generate-sdk-form" method="post">
+					  		<select th:field="*{language}" class="form-control"  aria-describedby="clientLangHelp">
+								<option id="java"  value="java">Java</option>
+								<option id="c" value="c">C</option>
+							</select>
+							<small id="clientLangHelp" class="form-text text-muted bottom-margin">Specify the language of your choice</small>
+							<button type="submit" class="btn custom-button">Download SDK</button>
+				  		</form>
+				  	</div>
+				  	
+				  	<!-- Discuss it -->
+				  	<div class="content-panel discuss-panel" style="display:none;">
+				  		
 				  	</div>
 			  </div>
 			</div>

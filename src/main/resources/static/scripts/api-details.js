@@ -14,6 +14,21 @@ $( document ).ready(function() {
 	   if ($(this).hasClass('info-navbar')) {
 			  $('.content-panel').hide();
 			  $('.info-panel').show();
-		   }
+		}
+	   
+	   if ($(this).hasClass('integrate-navbar')) {
+			  $('.content-panel').hide();
+			  $('.integrate-panel').show();
+		}
+	   
+	   if ($(this).hasClass('inspect-navbar')) {
+			  $('.content-panel').hide();
+			  $('.inspect-panel').show();
+		}
+	   
+	   if ($(this).hasClass('discuss-navbar')) {
+			  $('.content-panel').hide();
+			  $('.discuss-panel').show();
+		}
 	 });
 });
