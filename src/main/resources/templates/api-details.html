@@ -57,7 +57,6 @@
 					    <p class="card-text" th:text="${webService.serviceProvider.description}"></p>
 					    <p class="card-text" th:text="${webService.serviceProvider.type.name}"></p>			    
 					    <a th:attr="href=${webService.serviceProvider.website}" class="btn btn-primary custom-button">Visit website</a>
-					    <a href="/client/generate/3/java" class="btn btn-primary custom-button">Test</a>
 				  	</div>
 				  	
 				  	<!-- Play with it -->
@@ -78,8 +77,72 @@
 				  		<h5 class="card-title">Generate your SDK client</h5>
 				  		<form th:object="${clientSdkGenerationForm}" th:action="@{/client/generate/} + ${webService.id}" class="generate-sdk-form" method="post">
 					  		<select th:field="*{language}" class="form-control"  aria-describedby="clientLangHelp">
+								<option id="ada"  value="ada">Ada</option>
+								<option id="android"  value="android">Android</option>
+								<option id="apex"  value="apex">Apex</option>
+								<option id="asciidoc"  value="asciidoc">Asciidoc</option>
+								<option id="bash"  value="bash">Bash</option>
+								<option id="c"  value="c">C</option>
+								<option id="clojure"  value="clojure">Clojure</option>
+								<option id="cpp-qt5-client"  value="cpp-qt5-client">Cpp-qt5-client</option>
+								<option id="cpp-restsdk"  value="cpp-restsdk">Cpp-restsdk</option>
+								<option id="cpp-tizen"  value="cpp-tizen">Cpp-tizen</option>
+								<option id="csharp"  value="csharp">Csharp</option>
+								<option id="csharp-dotnet2"  value="csharp-dotnet2">Csharp-dotnet2</option>
+								<option id="csharp-netcore"  value="csharp-netcore">Csharp-netcore</option>
+								<option id="cwiki"  value="cwiki">Cwiki</option>
+								<option id="dart"  value="dart">Dart</option>
+								<option id="dart-jaguar"  value="dart-jaguar">Dart-jaguar</option>
+								<option id="dynamic-html"  value="dynamic-html">Dynamic-html</option>
+								<option id="eiffel"  value="eiffel">Eiffel</option>
+								<option id="elixir"  value="elixir">Elixir</option>
+								<option id="elm"  value="elm">Elm</option>
+								<option id="erlang-client"  value="erlang-client">Erlang-client</option>
+								<option id="erlang-proper"  value="erlang-proper">Erlang-proper</option>
+								<option id="flash"  value="flash">Flash</option>
+								<option id="go"  value="go">Go</option>
+								<option id="go-experimental"  value="go-experimental">Go-experimental</option>
+								<option id="groovy"  value="groovy">Groovy</option>
+								<option id="haskell-http-client"  value="haskell-http-client">Haskell-http-client</option>
+								<option id="html"  value="html">Html</option>
+								<option id="html2"  value="html2">Html2</option>
 								<option id="java"  value="java">Java</option>
-								<option id="c" value="c">C</option>
+								<option id="javascript"  value="javascript">Javascript</option>
+								<option id="javascript-closure-angular"  value="javascript-closure-angular">Javascript-closure-angular</option>
+								<option id="javascript-flowtyped"  value="javascript-flowtyped">Javascript-flowtyped</option>
+								<option id="jaxrs-cxf-client"  value="jaxrs-cxf-client">Jaxrs-cxf-client</option>
+								<option id="jmeter"  value="jmeter">Jmeter</option>
+								<option id="kotlin"  value="kotlin">Kotlin</option>
+								<option id="lua"  value="lua">Lua</option>
+								<option id="nim"  value="nim">Nim</option>
+								<option id="objc"  value="objc">Objc</option>
+								<option id="ocaml"  value="ocaml">Ocaml</option>
+								<option id="openapi"  value="openapi">Openapi</option>
+								<option id="openapi-yaml"  value="openapi-yaml">Openapi-yaml</option>
+								<option id="perl"  value="perl">Perl</option>
+								<option id="php"  value="php">Php</option>
+								<option id="powershell"  value="powershell">Powershell</option>
+								<option id="python"  value="python">Python</option>
+								<option id="python-experimental"  value="python-experimental">Python-experimental</option>
+								<option id="r"  value="r">R</option>
+								<option id="ruby"  value="ruby">Ruby</option>
+								<option id="rust"  value="rust">Rust</option>
+								<option id="scala-akka"  value="scala-akka">Scala-akka</option>
+								<option id="scala-gatling"  value="scala-gatling">Scala-gatling</option>
+								<option id="scala-httpclient-deprecated"  value="scala-httpclient-deprecated">Scala-httpclient-deprecated</option>
+								<option id="scalaz"  value="scalaz">Scalaz</option>
+								<option id="swift2-deprecated"  value="swift2-deprecated">Swift2-deprecated</option>
+								<option id="swift3-deprecated"  value="swift3-deprecated">Swift3-deprecated</option>
+								<option id="swift4"  value="swift4">Swift4</option>
+								<option id="typescript-angular"  value="typescript-angular">Typescript-angular</option>
+								<option id="typescript-angularjs"  value="typescript-angularjs">Typescript-angularjs</option>
+								<option id="typescript-aurelia"  value="typescript-aurelia">Typescript-aurelia</option>
+								<option id="typescript-axios"  value="typescript-axios">Typescript-axios</option>
+								<option id="typescript-fetch"  value="typescript-fetch">Typescript-fetch</option>
+								<option id="typescript-inversify"  value="typescript-inversify">Typescript-inversify</option>
+								<option id="typescript-jquery"  value="typescript-jquery">Typescript-jquery</option>
+								<option id="typescript-node"  value="typescript-node">Typescript-node</option>
+								<option id="typescript-rxjs"  value="typescript-rxjs">Typescript-rxjs</option>
 							</select>
 							<small id="clientLangHelp" class="form-text text-muted bottom-margin">Specify the language of your choice</small>
 							<button type="submit" class="btn custom-button">Download SDK</button>
