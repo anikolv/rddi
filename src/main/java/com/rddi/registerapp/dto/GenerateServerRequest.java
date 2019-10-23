@@ -1,10 +1,10 @@
 package com.rddi.registerapp.dto;
 
-public class GenerateClientRequest {
+public class GenerateServerRequest {
 
 	String openAPIUrl;
 
-	public GenerateClientRequest(String openAPIUrl) {
+	public GenerateServerRequest(String openAPIUrl) {
 		this.openAPIUrl = openAPIUrl;
 	}
 

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.rddi.registerapp.form.ClientSdkGenerationForm;
+import com.rddi.registerapp.form.ServerStubGenerationForm;
 import com.rddi.registerapp.form.WebServiceForm;
 import com.rddi.registerapp.form.WebServiceSearchForm;
 import com.rddi.registerapp.model.ServiceProvider;
@@ -51,6 +52,7 @@ public class HomeController {
 		WebService webService = webServiceRepository.findById(webServiceId).orElse(null);
 		model.addAttribute("webService", webService);
 		model.addAttribute("clientSdkGenerationForm", new ClientSdkGenerationForm());
+		model.addAttribute("serverStubGenerationForm", new ServerStubGenerationForm());
 		
 		return "api-details";
 	}

@@ -26,6 +26,9 @@
 			        <a class="nav-link info-navbar active" href="#">General information</a>
 			      </li>
 			      <li class="nav-item">
+			        <a class="nav-link evaluate-navbar" href="#" tabindex="-1">Evaluate it</a>
+			      </li>
+			      <li class="nav-item">
 			        <a class="nav-link inspect-navbar" href="#" tabindex="-1">Inspect it</a>
 			      </li>
 			      <li class="nav-item">
@@ -33,6 +36,9 @@
 			      </li>
 			      <li class="nav-item">
 			        <a class="nav-link integrate-navbar" href="#" tabindex="-1">Integrate it</a>
+			      </li>
+			      <li class="nav-item">
+			        <a class="nav-link fork-navbar" href="#" tabindex="-1">Fork it</a>
 			      </li>
 			      <li class="nav-item">
 			        <a class="nav-link discuss-navbar" href="#" tabindex="-1">Discuss it</a>
@@ -57,6 +63,13 @@
 					    <p class="card-text" th:text="${webService.serviceProvider.description}"></p>
 					    <p class="card-text" th:text="${webService.serviceProvider.type.name}"></p>			    
 					    <a th:attr="href=${webService.serviceProvider.website}" class="btn btn-primary custom-button">Visit website</a>
+				  	</div>
+				  	
+				  	<!-- Evaluate it -->
+				  	<div class="content-panel еvaluate-panel" style="display:none;">
+				  		Availability statistics based on automated sanity checks
+				  		Community rating
+				  		Reliability based on provided website, reference documentation and other markers
 				  	</div>
 				  	
 				  	<!-- Play with it -->
@@ -149,9 +162,68 @@
 				  		</form>
 				  	</div>
 				  	
+				  	<!-- Fork it -->
+				  	<div class="content-panel fork-panel" style="display:none;">
+				  		<h5 class="card-title">Generate your server stub</h5>
+				  		<form th:object="${serverStubGenerationForm}" th:action="@{/server/generate/} + ${webService.id}" class="generate-server-form" method="post">
+					  		<select th:field="*{framework}" class="form-control"  aria-describedby="serverFrameworkHelp">
+								<option id="ada-server"  value="ada-server">Ada-server</option>
+								<option id="aspnetcore"  value="aspnetcore">Aspnetcore</option>
+								<option id="cpp-pistache-server"  value="cpp-pistache-server">Cpp-pistache-server</option>
+								<option id="cpp-qt5-qhttpengine-server"  value="cpp-qt5-qhttpengine-server">Cpp-qt5-qhttpengine-server</option>
+								<option id="cpp-restbed-server"  value="cpp-restbed-server">Cpp-restbed-server</option>
+								<option id="csharp-nancyfx"  value="csharp-nancyfx">Csharp-nancyfx</option>
+								<option id="erlang-server"  value="erlang-server">Erlang-server</option>
+								<option id="fsharp-functions"  value="fsharp-functions">Fsharp-functions</option>
+								<option id="fsharp-giraffe-server"  value="fsharp-giraffe-server">Fsharp-giraffe-server</option>
+								<option id="go-gin-server"  value="go-gin-server">Go-gin-server</option>
+								<option id="go-server"  value="go-server">Go-server</option>
+								<option id="graphql-nodejs-express-server"  value="graphql-nodejs-express-server">Graphql-nodejs-express-server</option>
+								<option id="haskell"  value="haskell">Haskell</option>
+								<option id="java-inflector"  value="java-inflector">Java-inflector</option>
+								<option id="java-msf4j"  value="java-msf4j">Java-msf4j</option>
+								<option id="java-pkmst"  value="java-pkmst">Java-pkmst</option>
+								<option id="java-play-framework"  value="java-play-framework">Java-play-framework</option>
+								<option id="java-undertow-server"  value="java-undertow-server">Java-undertow-server</option>
+								<option id="java-vertx"  value="java-vertx">Java-vertx</option>
+								<option id="jaxrs-cxf"  value="jaxrs-cxf">Jaxrs-cxf</option>
+								<option id="jaxrs-cxf-cdi"  value="jaxrs-cxf-cdi">Jaxrs-cxf-cdi</option>
+								<option id="jaxrs-cxf-extended"  value="jaxrs-cxf-extended">Jaxrs-cxf-extended</option>
+								<option id="jaxrs-jersey"  value="jaxrs-jersey">Jaxrs-jersey</option>
+								<option id="jaxrs-resteasy"  value="jaxrs-resteasy">Jaxrs-resteasy</option>
+								<option id="jaxrs-resteasy-eap"  value="jaxrs-resteasy-eap">Jaxrs-resteasy-eap</option>
+								<option id="jaxrs-spec"  value="jaxrs-spec">Jaxrs-spec</option>
+								<option id="kotlin-server"  value="kotlin-server">Kotlin-server</option>
+								<option id="kotlin-spring"  value="kotlin-spring">Kotlin-spring</option>
+								<option id="kotlin-vertx"  value="kotlin-vertx">Kotlin-vertx</option>
+								<option id="nodejs-express-server"  value="nodejs-express-server">Nodejs-express-server</option>
+								<option id="nodejs-server-deprecated"  value="nodejs-server-deprecated">Nodejs-server-deprecated</option>
+								<option id="php-laravel"  value="php-laravel">Php-laravel</option>
+								<option id="php-lumen"  value="php-lumen">Php-lumen</option>
+								<option id="php-silex"  value="php-silex">Php-silex</option>
+								<option id="php-slim"  value="php-slim">Php-slim</option>
+								<option id="php-symfony"  value="php-symfony">Php-symfony</option>
+								<option id="php-ze-ph"  value="php-ze-ph">Php-ze-ph</option>
+								<option id="python-aiohttp"  value="python-aiohttp">Python-aiohttp</option>
+								<option id="python-blueplanet"  value="python-blueplanet">Python-blueplanet</option>
+								<option id="python-flask"  value="python-flask">Python-flask</option>
+								<option id="ruby-on-rails"  value="ruby-on-rails">Ruby-on-rails</option>
+								<option id="ruby-sinatra"  value="ruby-sinatra">Ruby-sinatra</option>
+								<option id="rust-server"  value="rust-server">Rust-server</option>
+								<option id="scala-finch"  value="scala-finch">Scala-finch</option>
+								<option id="scala-lagom-server"  value="scala-lagom-server">Scala-lagom-server</option>
+								<option id="scala-play-server"  value="scala-play-server">Scala-play-server</option>
+								<option id="scalatra"  value="scalatra">Scalatra</option>
+								<option id="spring"  value="spring">Spring</option>
+							</select>
+							<small id="serverFrameworkHelp" class="form-text text-muted bottom-margin">Specify the framework of your choice</small>
+							<button type="submit" class="btn custom-button">Download Stub</button>
+				  		</form>
+				  	</div>`
+				  	
 				  	<!-- Discuss it -->
 				  	<div class="content-panel discuss-panel" style="display:none;">
-				  		
+				  		Rate and comment
 				  	</div>
 				  	
 				  	<input type="hidden" id="contract-url" th:value="${webService.openApiContract}"></input>

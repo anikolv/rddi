@@ -16,9 +16,19 @@ $( document ).ready(function() {
 			  $('.info-panel').show();
 		}
 	   
+	   if ($(this).hasClass('evaluate-navbar')) {
+			  $('.content-panel').hide();
+			  $('.еvaluate-panel').show();
+		}
+	   
 	   if ($(this).hasClass('integrate-navbar')) {
 			  $('.content-panel').hide();
 			  $('.integrate-panel').show();
+		}
+	   
+	   if ($(this).hasClass('fork-navbar')) {
+			  $('.content-panel').hide();
+			  $('.fork-panel').show();
 		}
 	   
 	   if ($(this).hasClass('inspect-navbar')) {

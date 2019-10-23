@@ -13,5 +13,7 @@ public interface WebServiceManagement {
 			WebServiceCategory webServiceCategory, ServiceProviderType serviceProviderType);
 	
 	public byte[] generateClient(Long webServiceId, String clientType);
+	
+	public byte[] generateServer(Long webServiceId, String serverType);
 
 }
