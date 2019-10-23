@@ -24,6 +24,14 @@ $( document ).ready(function() {
 	   if ($(this).hasClass('inspect-navbar')) {
 			  $('.content-panel').hide();
 			  $('.inspect-panel').show();
+			  
+			   $.get( $("#contract-url").val(), function( data ) {
+				   var editor = ace.edit("editor");
+				   editor.setTheme("ace/theme/monokai");
+				   editor.session.setMode("ace/mode/json");
+				   editor.setValue(JSON.stringify(data, null, '\t'));
+				   editor.setReadOnly(true);
+				 });
 		}
 	   
 	   if ($(this).hasClass('discuss-navbar')) {
