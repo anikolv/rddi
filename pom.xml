@@ -100,7 +100,22 @@
         <dependency>
             <groupId>com.querydsl</groupId>
             <artifactId>querydsl-jpa</artifactId>
-        </dependency>        
+        </dependency> 
+        
+        <!-- Joda time -->
+		<dependency>
+		    <groupId>joda-time</groupId>
+		    <artifactId>joda-time</artifactId>
+		</dependency>
+		
+		<!-- D3 progress meter -->
+		<dependency>
+		    <groupId>org.webjars.bowergithub.collaborne</groupId>
+		    <artifactId>d3-progress-meter</artifactId>
+		    <version>2.1.0</version>
+		</dependency>
+		
+              
 	</dependencies>
 
 	<dependencyManagement>

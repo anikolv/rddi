@@ -17,6 +17,7 @@ import com.rddi.registerapp.form.WebServiceForm;
 import com.rddi.registerapp.form.WebServiceSearchForm;
 import com.rddi.registerapp.model.ServiceProvider;
 import com.rddi.registerapp.model.WebService;
+import com.rddi.registerapp.model.WebServiceStatus;
 import com.rddi.registerapp.model.enums.ServiceProviderType;
 import com.rddi.registerapp.model.enums.WebServiceCategory;
 import com.rddi.registerapp.model.enums.WebServiceType;
@@ -50,7 +51,12 @@ public class HomeController {
 	@GetMapping(value="/api/details/{webServiceId}")
 	public String apiDetails(@PathVariable("webServiceId") Long webServiceId, Model model) {
 		WebService webService = webServiceRepository.findById(webServiceId).orElse(null);
+		WebServiceStatus webServiceStatus = webServiceManagement.getLastWebServiceStatus(webService);
+		Double lastMonthAvailabilityInPercentage = webServiceManagement.getLastMonthAvailabilityInPercentage(webService);
+		
 		model.addAttribute("webService", webService);
+		model.addAttribute("webServiceStatus", webServiceStatus);
+		model.addAttribute("lastMonthAvailabilityInPercentage", lastMonthAvailabilityInPercentage);
 		model.addAttribute("clientSdkGenerationForm", new ClientSdkGenerationForm());
 		model.addAttribute("serverStubGenerationForm", new ServerStubGenerationForm());
 		

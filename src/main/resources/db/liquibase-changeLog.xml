@@ -99,4 +99,29 @@
 			ALTER COLUMN description TYPE TEXT;
 	    </sql>
     </changeSet>
+    
+    <changeSet author="Alexander Nikolov" id="sanity-check-model">
+	     <sql splitStatements="true">
+			ALTER TABLE web_services
+			DROP COLUMN http_status_code,
+			DROP COLUMN http_status_message;
+			
+			CREATE SEQUENCE web_services_availability_id_seq INCREMENT BY 1 NO MINVALUE NO MAXVALUE START WITH 1 NO CYCLE;
+			
+			CREATE TABLE web_services_availability(
+			   id int8 NOT NULL PRIMARY KEY DEFAULT nextval('web_services_availability_id_seq'),
+			   http_status_code VARCHAR(50), 
+			   http_status_message VARCHAR (50),
+			   available BOOLEAN,
+			   web_service_id int8 REFERENCES web_services (id)
+			);
+	    </sql>
+    </changeSet>
+    
+    <changeSet author="Alexander Nikolov" id="web-service-status-temporal-aspect">
+	     <sql splitStatements="true">
+			ALTER TABLE web_services_availability
+			ADD COLUMN checked_at TIMESTAMP;
+	    </sql>
+    </changeSet>
 </databaseChangeLog>

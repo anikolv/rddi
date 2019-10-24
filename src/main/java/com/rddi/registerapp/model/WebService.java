@@ -27,8 +27,6 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.rddi.registerapp.model.enums.WebServiceCategory;
 import com.rddi.registerapp.model.enums.WebServiceType;
 
-import lombok.Data;
-
 @Entity
 @Table(name = "web_services")
 public class WebService {
@@ -62,12 +60,6 @@ public class WebService {
 	@Enumerated(EnumType.STRING)
 	private WebServiceType type;
 	
-	@Column(name = "http_status_code")
-	private String httpStatusCode;
-	
-	@Column(name = "http_status_message")
-	private String httpStatusMessage;
-	
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "parent_web_service_id")
 	private WebService parentWebService;
@@ -84,6 +76,10 @@ public class WebService {
 	@JsonManagedReference
 	@OneToMany(mappedBy = "webService", orphanRemoval = true, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private Set<WebServiceComment> comments = new LinkedHashSet<WebServiceComment>();
+	
+	@JsonManagedReference
+	@OneToMany(mappedBy = "webService", orphanRemoval = true, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private Set<WebServiceStatus> httpStatuses = new LinkedHashSet<WebServiceStatus>();
 
 	public Long getId() {
 		return id;
@@ -157,22 +153,6 @@ public class WebService {
 		this.type = type;
 	}
 
-	public String getHttpStatusCode() {
-		return httpStatusCode;
-	}
-
-	public void setHttpStatusCode(String httpStatusCode) {
-		this.httpStatusCode = httpStatusCode;
-	}
-
-	public String getHttpStatusMessage() {
-		return httpStatusMessage;
-	}
-
-	public void setHttpStatusMessage(String httpStatusMessage) {
-		this.httpStatusMessage = httpStatusMessage;
-	}
-
 	public WebService getParentWebService() {
 		return parentWebService;
 	}
@@ -208,5 +188,18 @@ public class WebService {
 	public void addServiceProvider(ServiceProvider serviceProvider) {
 		this.serviceProvider = serviceProvider;
 		serviceProvider.getWebServices().add(this);
+	}
+
+	public Set<WebServiceStatus> getHttpStatuses() {
+		return httpStatuses;
+	}
+
+	public void setHttpStatuses(Set<WebServiceStatus> httpStatuses) {
+		this.httpStatuses = httpStatuses;
+	}
+	
+	public void addStatus(WebServiceStatus webServiceStatus) {
+		this.httpStatuses.add(webServiceStatus);
+		webServiceStatus.setWebService(this);
 	}
 }
