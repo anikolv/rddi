@@ -140,13 +140,22 @@ public class WebServiceManagementImpl implements WebServiceManagement {
 		return lastMonthAvailabilityPercentage;
 	}
 	
-	public static void main(String[] args) {
-		long test = 19;
-		int test2 = 20;
+	@Override
+	public Double getReliabilityInPercentage(WebService webService) {
+		int reliabilityPoints = 0;
+		if (webService.getDocumentationUrl() != null) {
+			reliabilityPoints++;
+		}
+		if (webService.getServiceProvider().getWebsite() != null) {
+			reliabilityPoints++;
+		}
+		if (webService.getServiceProvider().getType() != null) {
+			reliabilityPoints++;
+		}
 		
-		Double lastMonthAvailabilityPercentage = (Long.valueOf(test).doubleValue() / test2) * 100;
-
-		
-		System.out.println(lastMonthAvailabilityPercentage);
+		Double reliabilityInPercentage = (Integer.valueOf(reliabilityPoints).doubleValue() / 3) * 100;
+				
+		return reliabilityInPercentage;
 	}
+	
 }

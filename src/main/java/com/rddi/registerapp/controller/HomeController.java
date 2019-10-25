@@ -53,10 +53,12 @@ public class HomeController {
 		WebService webService = webServiceRepository.findById(webServiceId).orElse(null);
 		WebServiceStatus webServiceStatus = webServiceManagement.getLastWebServiceStatus(webService);
 		Double lastMonthAvailabilityInPercentage = webServiceManagement.getLastMonthAvailabilityInPercentage(webService);
+		Double reliabilityPercentage = webServiceManagement.getReliabilityInPercentage(webService);
 		
 		model.addAttribute("webService", webService);
 		model.addAttribute("webServiceStatus", webServiceStatus);
 		model.addAttribute("lastMonthAvailabilityInPercentage", lastMonthAvailabilityInPercentage);
+		model.addAttribute("reliabilityPercentage", reliabilityPercentage);
 		model.addAttribute("clientSdkGenerationForm", new ClientSdkGenerationForm());
 		model.addAttribute("serverStubGenerationForm", new ServerStubGenerationForm());
 		

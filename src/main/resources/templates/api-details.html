@@ -68,8 +68,18 @@
 				  	
 				  	<!-- Evaluate it -->
 				  	<div class="content-panel еvaluate-panel" style="display:none;">
+				  		<h2 class="bottom-margin">
+				  			Last status check:
+				  			<span class="badge badge-success" th:if="${webServiceStatus.available}">Online</span>
+							<span class="badge badge-danger" th:if="${not webServiceStatus.available}">Offline</span>
+						</h2>
+						
 				  		<d3-progress-meter radius="100" th:attr="percentage=${lastMonthAvailabilityInPercentage/100}, current-text=${lastMonthAvailabilityInPercentage}" 
 				  		 	goal-text="%" type-text="Last month availability">
+				  		</d3-progress-meter>
+				  		
+				  		<d3-progress-meter radius="100" th:attr="percentage=${reliabilityPercentage/100}, current-text=${reliabilityPercentage}" 
+				  		 	goal-text="%" type-text="Reliability assessment">
 				  		</d3-progress-meter>
 				  	</div>
 				  	

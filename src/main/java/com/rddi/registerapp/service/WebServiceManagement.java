@@ -20,4 +20,6 @@ public interface WebServiceManagement {
 	WebServiceStatus getLastWebServiceStatus(WebService webService);
 	
 	Double getLastMonthAvailabilityInPercentage(WebService webService);
+	
+	Double getReliabilityInPercentage(WebService webService);
 }

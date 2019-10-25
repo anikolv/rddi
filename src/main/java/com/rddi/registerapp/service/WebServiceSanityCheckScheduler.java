@@ -20,7 +20,7 @@ public class WebServiceSanityCheckScheduler {
 	@Autowired
 	private WebServiceRepository webServiceRepository;
 	
-	@Scheduled(cron = "0 0/30 * * * ?")
+	@Scheduled(cron = "0 0 12 * * *")
 	public void performSanityCheck() {
 	    System.out.println("[SANITY CHECK SCHEDULER START]");
 	    
