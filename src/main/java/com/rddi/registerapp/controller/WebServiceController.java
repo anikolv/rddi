@@ -10,16 +10,27 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.rddi.registerapp.dto.RateWebServiceRequest;
 import com.rddi.registerapp.form.ClientSdkGenerationForm;
 import com.rddi.registerapp.form.ServerStubGenerationForm;
 import com.rddi.registerapp.service.WebServiceManagement;
 
 @Controller
+@RequestMapping(value = "/ws")
 public class WebServiceController {
 	
 	@Autowired
 	private WebServiceManagement webServiceManagement;
+	
+	@PostMapping(value = "/rate")
+	@ResponseBody
+	public void rateWebService(@RequestBody RateWebServiceRequest rateWebServiceRequest) {
+		webServiceManagement.rateWebService(rateWebServiceRequest.getWebServiceId(), rateWebServiceRequest.getRating());
+	}
 	
 	@PostMapping(value = "/client/generate/{webServiceId}")
 	public void generateClient(

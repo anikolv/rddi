@@ -22,4 +22,6 @@ public interface WebServiceManagement {
 	Double getLastMonthAvailabilityInPercentage(WebService webService);
 	
 	Double getReliabilityInPercentage(WebService webService);
+	
+	void rateWebService(Long webServiceId, Long rating);
 }

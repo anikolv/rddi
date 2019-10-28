@@ -124,4 +124,17 @@
 			ADD COLUMN checked_at TIMESTAMP;
 	    </sql>
     </changeSet>
+    
+    <changeSet author="Alexander Nikolov" id="create-ratings-model">
+	     <sql splitStatements="true">
+			CREATE SEQUENCE web_services_ratings_id_seq INCREMENT BY 1 NO MINVALUE NO MAXVALUE START WITH 1 NO CYCLE;
+			
+			CREATE TABLE web_services_ratings (
+			   id int8 NOT NULL PRIMARY KEY DEFAULT nextval('web_services_ratings_id_seq'),
+			   rating int8 NOT NULL, 
+			   created_at TIMESTAMP,
+			   web_service_id int8 REFERENCES web_services (id)
+			);
+	    </sql>
+    </changeSet>
 </databaseChangeLog>

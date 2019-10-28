@@ -1,4 +1,6 @@
-$( document ).ready(function() {
+$( document ).ready(function() {	 
+   $('#rateMe1').mdbRate();
+	  
    $( ".nav-link" ).click(function() {
 	   $('.nav-link').each(function(i, obj) {
 		   $(this).removeClass('active');
@@ -48,5 +50,34 @@ $( document ).ready(function() {
 			  $('.content-panel').hide();
 			  $('.discuss-panel').show();
 		}
+	   
+	   if ($(this).hasClass('rate-navbar')) {
+			  $('.content-panel').hide();
+			  $('.rate-panel').show();
+		}
 	 });
+   
+   var apiRated = $.cookie('rated-api-' +  Number($("#web-service-id").val()));
+   if (apiRated) {
+	   $(".api-rating").hide();
+	   $(".api-rated").show();
+   }
+   
+   $('#rateMe1').on('click', '.rate-popover',  function() {
+	    var webServiceIdValue =  Number($("#web-service-id").val());
+	    var ratingValue = Number($(this).attr("data-index")) + 1;
+	    var dataJson = JSON.stringify({rating: ratingValue, webServiceId: webServiceIdValue});
+	    
+	    $.ajax({
+	        type: 'POST',
+	        url: '/ws/rate',
+	        data: dataJson,
+	        contentType: "application/json",
+	        dataType: 'json'
+	    });
+	    
+	    $.cookie('rated-api-' + webServiceIdValue, true);
+	    $(".api-rating").hide();
+		$(".api-rated").show();
+   });
 });

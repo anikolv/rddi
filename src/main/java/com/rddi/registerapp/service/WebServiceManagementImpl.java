@@ -22,11 +22,13 @@ import com.rddi.registerapp.dto.GenerateServerRequest;
 import com.rddi.registerapp.dto.GenerateServerResponse;
 import com.rddi.registerapp.model.QWebService;
 import com.rddi.registerapp.model.WebService;
+import com.rddi.registerapp.model.WebServiceRating;
 import com.rddi.registerapp.model.WebServiceStatus;
 import com.rddi.registerapp.model.enums.ServiceProviderType;
 import com.rddi.registerapp.model.enums.WebServiceCategory;
 import com.rddi.registerapp.model.enums.WebServiceType;
 import com.rddi.registerapp.predicate.WebServiceStatusPredicates;
+import com.rddi.registerapp.repository.WebServiceRatingRepository;
 import com.rddi.registerapp.repository.WebServiceRepository;
 import com.rddi.registerapp.repository.WebServiceStatusRepository;
 
@@ -39,6 +41,9 @@ public class WebServiceManagementImpl implements WebServiceManagement {
 	@Autowired
 	private WebServiceStatusRepository webServiceStatusRepository;
 	
+	@Autowired
+	private WebServiceRatingRepository webServiceRatingRepository;
+	
 	@Value( "${openapi.generator.url}" )
 	private String openApiGeneratorUrl;
 	
@@ -47,6 +52,18 @@ public class WebServiceManagementImpl implements WebServiceManagement {
 	@PostConstruct
 	public void init() {
 		restTemplate = new RestTemplate();
+	}
+	
+	@Override
+	public void rateWebService(Long webServiceId, Long rating) {
+		WebService webService = webServiceRepository.findById(webServiceId).orElse(null);
+		
+		WebServiceRating webServiceRating = new WebServiceRating();
+		webServiceRating.setRating(rating);
+		webServiceRating.setWebService(webService);
+		webServiceRating.setCreatedAt(new Date());
+		
+		webServiceRatingRepository.save(webServiceRating);
 	}
 
 	@Override

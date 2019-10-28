@@ -43,3 +43,11 @@
         width: 100%;
         height: 600px;
 }
+
+.amber-text {
+    color: #ffc107!important;
+}
+
+.rate-popover {
+  cursor: pointer;
+}

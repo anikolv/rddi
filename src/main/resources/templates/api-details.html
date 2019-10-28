@@ -44,6 +44,9 @@
 			      <li class="nav-item">
 			        <a class="nav-link discuss-navbar" href="#" tabindex="-1">Discuss it</a>
 			      </li>
+			      <li class="nav-item">
+			        <a class="nav-link rate-navbar" href="#" tabindex="-1">Rate it</a>
+			      </li>
 			    </ul>
 			  </div>
 			  <div class="card-body">
@@ -99,7 +102,7 @@
 				  	<!-- Integrate it -->
 				  	<div class="content-panel integrate-panel" style="display:none;">
 				  		<h5 class="card-title">Generate your SDK client</h5>
-				  		<form th:object="${clientSdkGenerationForm}" th:action="@{/client/generate/} + ${webService.id}" class="generate-sdk-form" method="post">
+				  		<form th:object="${clientSdkGenerationForm}" th:action="@{/ws/client/generate/} + ${webService.id}" class="generate-sdk-form" method="post">
 					  		<select th:field="*{language}" class="form-control"  aria-describedby="clientLangHelp">
 								<option id="ada"  value="ada">Ada</option>
 								<option id="android"  value="android">Android</option>
@@ -176,7 +179,7 @@
 				  	<!-- Fork it -->
 				  	<div class="content-panel fork-panel" style="display:none;">
 				  		<h5 class="card-title">Generate your server stub</h5>
-				  		<form th:object="${serverStubGenerationForm}" th:action="@{/server/generate/} + ${webService.id}" class="generate-server-form" method="post">
+				  		<form th:object="${serverStubGenerationForm}" th:action="@{/ws/server/generate/} + ${webService.id}" class="generate-server-form" method="post">
 					  		<select th:field="*{framework}" class="form-control"  aria-describedby="serverFrameworkHelp">
 								<option id="ada-server"  value="ada-server">Ada-server</option>
 								<option id="aspnetcore"  value="aspnetcore">Aspnetcore</option>
@@ -234,10 +237,36 @@
 				  	
 				  	<!-- Discuss it -->
 				  	<div class="content-panel discuss-panel" style="display:none;">
-				  		Rate and comment
+				  		<div class="card bottom-margin">
+						  <div class="card-body">
+						    This is some text within a card body.
+						  </div>
+						</div>
+												
+						<div class="card bottom-margin">
+						  <div class="card-body">
+						    This is some text within a card body.
+						  </div>
+						</div>
+				  	</div>
+				  	
+				  	<!-- Rate it -->
+				  	<div class="content-panel rate-panel" style="display:none;">
+				  		<h5 class="bottom-margin">
+				  			Rate this API:
+						</h5>
+						
+						<div class="alert alert-primary api-rated" role="alert" style="display:none;">
+ 							 Thank you for your feedback!
+						</div>
+						
+						<div class="container api-rating">
+  							<span id="rateMe1"></span>
+						</div>
 				  	</div>
 				  	
 				  	<input type="hidden" id="contract-url" th:value="${webService.openApiContract}"></input>
+				  	<input type="hidden" id="web-service-id" th:value="${webService.id}"></input>
 			  </div>
 			</div>
 			
@@ -246,8 +275,11 @@
 		
             				
 		<script type="text/javascript" src="/webjars/jquery/3.4.0/jquery.min.js"></script>
+		<script type="text/javascript" src="/rating-scripts/popper.min.js" charset="utf-8"></script>
 		<script type="text/javascript" src="/webjars/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 		<script type="text/javascript" src="/scripts/api-details.js"></script>
 		<script type="text/javascript" src="/ace-scripts/ace.js" charset="utf-8"></script>
+		<script type="text/javascript" src="/rating-scripts/rating.js" charset="utf-8"></script>
+		<script type="text/javascript" src="/jquery-cookie-scripts/jquery.cookie.js" charset="utf-8"></script>
 		<script type="module" src="/rapidoc-scripts/rapidoc-min.js"></script>
 	</body>
