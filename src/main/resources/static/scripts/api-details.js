@@ -13,9 +13,19 @@ $( document ).ready(function() {
 		  $('.play-panel').show();
 	   }
 	   
-	   if ($(this).hasClass('info-navbar')) {
+	   if ($(this).hasClass('meetit-navbar')) {
 			  $('.content-panel').hide();
-			  $('.info-panel').show();
+			  $('.meetit-panel').show();
+		}
+	   
+	   if ($(this).hasClass('provider-navbar')) {
+			  $('.content-panel').hide();
+			  $('.provider-panel').show();
+		}
+	   
+	   if ($(this).hasClass('doc-navbar')) {
+			  $('.content-panel').hide();
+			  $('.doc-panel').show();
 		}
 	   
 	   if ($(this).hasClass('evaluate-navbar')) {

@@ -24,7 +24,10 @@
 			  <div class="card-header">
 			    <ul class="nav nav-tabs card-header-tabs">
 			      <li class="nav-item">
-			        <a class="nav-link info-navbar active" href="#">General information</a>
+			        <a class="nav-link meetit-navbar active" href="#">Meet it</a>
+			      </li>
+			      <li class="nav-item">
+			        <a class="nav-link provider-navbar" href="#">Who provides it</a>
 			      </li>
 			      <li class="nav-item">
 			        <a class="nav-link evaluate-navbar" href="#" tabindex="-1">Evaluate it</a>
@@ -47,25 +50,27 @@
 			      <li class="nav-item">
 			        <a class="nav-link rate-navbar" href="#" tabindex="-1">Rate it</a>
 			      </li>
+			      <li class="nav-item">
+			        <a class="nav-link doc-navbar" href="#" tabindex="-1">Learn it</a>
+			      </li>
 			    </ul>
 			  </div>
 			  <div class="card-body">
-			  		<!-- General information -->
-			  		<div class="content-panel info-panel">
+			  		<!-- Meet it -->
+			  		<div class="content-panel meetit-panel">
 					  	<img class="icon-small bottom-margin" th:attr="src=${webService.serviceProvider.iconUrl}"  alt="Card image cap">
 					    <h3 class="card-title" th:text="${webService.name + ', version ' + webService.version}"></h3>
-					    <p class="card-text" th:text="${webService.description}"></p>
-					    <p class="card-text" th:text="${'Type: ' + webService.type.name}"></p>
-					    <p class="card-text" th:text="${'Domain: ' + webService.category.name}"></p>
-					    <p class="card-text">
-					    	Reference documenation:
-					    	<a th:text="${webService.documentationUrl}" th:attr="href=${webService.documentationUrl}"></a>
-					    </p>
-					    
-					    <h5 class="card-title">Powered by</h5>
-					    <p class="card-text" th:text="${webService.serviceProvider.name}"></p>
-					    <p class="card-text" th:text="${webService.serviceProvider.description}"></p>
-					    <p class="card-text" th:text="${webService.serviceProvider.type.name}"></p>			    
+					    <p class="card-text"><i th:text="${webService.description}"></i></p>
+					    <p class="card-text"><i th:text="${'Type: ' + webService.type.name}"></i></p>
+					    <p class="card-text"><i th:text="${'Domain: ' + webService.category.name}"></i></p>
+				  	</div>
+				  	
+				  	<!-- Who provides it -->
+			  		<div class="content-panel provider-panel" style="display:none;">
+					  	<img class="icon-small bottom-margin" th:attr="src=${webService.serviceProvider.iconUrl}"  alt="Card image cap">
+					  	<h3 class="card-title" th:text="${webService.serviceProvider.name}"></h3>					    
+					    <p class="card-text"><i th:text="${webService.serviceProvider.description}"></i></p>
+					    <p class="card-text"><i th:text="${webService.serviceProvider.type.name}"></i></p>			    
 					    <a th:attr="href=${webService.serviceProvider.website}" class="btn btn-primary custom-button">Visit website</a>
 				  	</div>
 				  	
@@ -291,6 +296,15 @@
 						
 						<div class="container api-rating">
   							<span id="rateMe1"></span>
+						</div>
+				  	</div>
+				  	
+				  	<!-- Learn it -->
+			  		<div class="content-panel doc-panel" style="display:none;">
+					    <iframe class="bottom-margin" th:if="${webService.documentationUrl != null}" th:attr="src=${webService.documentationUrl}" height="100%" width="100%" style="height: 600px;"></iframe>
+					    <a th:if="${webService.documentationUrl != null}" th:attr="href=${webService.documentationUrl}" class="btn btn-primary custom-button">Go to original website</a>
+					    <div th:if="${webService.documentationUrl == null}" class="alert alert-primary api-rated" role="alert">
+ 							No reference documentation available!
 						</div>
 				  	</div>
 				  	
