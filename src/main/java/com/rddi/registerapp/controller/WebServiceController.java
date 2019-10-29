@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.rddi.registerapp.dto.CommentWebServiceRequest;
 import com.rddi.registerapp.dto.RateWebServiceRequest;
+import com.rddi.registerapp.dto.ValidateContractResponse;
 import com.rddi.registerapp.dto.WebServiceCommentResponse;
 import com.rddi.registerapp.form.ClientSdkGenerationForm;
 import com.rddi.registerapp.form.ServerStubGenerationForm;
@@ -33,6 +34,14 @@ public class WebServiceController {
 	
 	@Autowired
 	private WebServiceManagement webServiceManagement;
+	
+	@GetMapping(value = "/validate")
+	@ResponseBody
+	public ValidateContractResponse getWebServiceComments(@RequestParam("contractUrl") String contractUrl) {
+		ValidateContractResponse response = webServiceManagement.validateWebServiceContract(contractUrl);
+		
+		return response;
+	}
 	
 	@GetMapping(value = "/comments")
 	@ResponseBody

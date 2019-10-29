@@ -3,6 +3,7 @@ package com.rddi.registerapp.service;
 import java.util.List;
 import java.util.OptionalDouble;
 
+import com.rddi.registerapp.dto.ValidateContractResponse;
 import com.rddi.registerapp.model.WebService;
 import com.rddi.registerapp.model.WebServiceComment;
 import com.rddi.registerapp.model.WebServiceStatus;
@@ -32,4 +33,6 @@ public interface WebServiceManagement {
 	void commentWebService(Long webServiceId, String author, String comment);
 	
 	List<WebServiceComment> getWebServiceComments(Long webServiceId);
+	
+	ValidateContractResponse validateWebServiceContract(String contractUrl);
 }

@@ -162,7 +162,11 @@
 							  <div class="form-group">
 							    <label for="apiSpecUrl">Spec URL*</label>
 							    <input type="text" class="form-control required-ws" th:field="*{apiSpecUrl}" aria-describedby="webApiSpecHelp" placeholder="https://petstore.swagger.io/v2/swagger.json">
-							    <small id="webApiSpecHelp" class="form-text text-muted">This is the URL to your OpenAPI 3.0 specification in either YAML or JSON format</small>
+							    <small id="webApiSpecHelp" class="form-text text-muted bottom-margin">This is the URL to your OpenAPI 3.0 specification in either YAML or JSON format</small>
+							    
+							     <div class="alert alert-danger api-spec-error" role="alert" style="display:none;">
+ 									 
+								</div>
 							  </div>
 					        </div>
 					        					        				

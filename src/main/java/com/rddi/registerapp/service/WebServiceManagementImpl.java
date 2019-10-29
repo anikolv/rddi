@@ -21,6 +21,7 @@ import com.rddi.registerapp.dto.GenerateClientRequest;
 import com.rddi.registerapp.dto.GenerateClientResponse;
 import com.rddi.registerapp.dto.GenerateServerRequest;
 import com.rddi.registerapp.dto.GenerateServerResponse;
+import com.rddi.registerapp.dto.ValidateContractResponse;
 import com.rddi.registerapp.model.QWebService;
 import com.rddi.registerapp.model.WebService;
 import com.rddi.registerapp.model.WebServiceComment;
@@ -52,6 +53,9 @@ public class WebServiceManagementImpl implements WebServiceManagement {
 	
 	@Value( "${openapi.generator.url}" )
 	private String openApiGeneratorUrl;
+	
+	@Value( "${openapi.validator.url}" )
+	private String openApiValidatorUrl;
 	
 	private RestTemplate restTemplate;
 	
@@ -171,6 +175,14 @@ public class WebServiceManagementImpl implements WebServiceManagement {
 		byte[] downloadedBytes = restTemplate.getForObject(sdkFileDownloadUrl, byte[].class);
 		
 		return downloadedBytes;
+	}
+	
+	@Override
+	public ValidateContractResponse validateWebServiceContract(String contractUrl) {
+		String requestUrl = openApiValidatorUrl + contractUrl;
+		ValidateContractResponse response = restTemplate.getForObject(requestUrl, ValidateContractResponse.class);
+		
+		return response;
 	}
 	
 	@Override
