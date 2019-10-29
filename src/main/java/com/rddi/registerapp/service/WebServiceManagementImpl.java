@@ -3,6 +3,7 @@ package com.rddi.registerapp.service;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.OptionalDouble;
 
 import javax.annotation.PostConstruct;
 
@@ -52,6 +53,17 @@ public class WebServiceManagementImpl implements WebServiceManagement {
 	@PostConstruct
 	public void init() {
 		restTemplate = new RestTemplate();
+	}
+	
+	@Override
+	public OptionalDouble getAverageWebServiceRating(WebService webService) {
+		List<WebServiceRating> ratings = webServiceRatingRepository.findAllByWebService(webService);
+		OptionalDouble averageRating = ratings
+				.stream()
+				.mapToLong(webServiceRating -> webServiceRating.getRating())
+				.average();
+		
+		return averageRating;
 	}
 	
 	@Override

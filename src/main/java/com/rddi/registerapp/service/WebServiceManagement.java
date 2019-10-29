@@ -1,6 +1,7 @@
 package com.rddi.registerapp.service;
 
 import java.util.List;
+import java.util.OptionalDouble;
 
 import com.rddi.registerapp.model.WebService;
 import com.rddi.registerapp.model.WebServiceStatus;
@@ -24,4 +25,6 @@ public interface WebServiceManagement {
 	Double getReliabilityInPercentage(WebService webService);
 	
 	void rateWebService(Long webServiceId, Long rating);
+	
+	OptionalDouble getAverageWebServiceRating(WebService webService);
 }

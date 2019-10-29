@@ -2,6 +2,7 @@ package com.rddi.registerapp.controller;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.OptionalDouble;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -54,11 +55,13 @@ public class HomeController {
 		WebServiceStatus webServiceStatus = webServiceManagement.getLastWebServiceStatus(webService);
 		Double lastMonthAvailabilityInPercentage = webServiceManagement.getLastMonthAvailabilityInPercentage(webService);
 		Double reliabilityPercentage = webServiceManagement.getReliabilityInPercentage(webService);
+		OptionalDouble averageRating = webServiceManagement.getAverageWebServiceRating(webService);
 		
 		model.addAttribute("webService", webService);
 		model.addAttribute("webServiceStatus", webServiceStatus);
 		model.addAttribute("lastMonthAvailabilityInPercentage", lastMonthAvailabilityInPercentage);
 		model.addAttribute("reliabilityPercentage", reliabilityPercentage);
+		model.addAttribute("averageRating", averageRating);
 		model.addAttribute("clientSdkGenerationForm", new ClientSdkGenerationForm());
 		model.addAttribute("serverStubGenerationForm", new ServerStubGenerationForm());
 		
