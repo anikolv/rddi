@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.OptionalDouble;
 
 import com.rddi.registerapp.model.WebService;
+import com.rddi.registerapp.model.WebServiceComment;
 import com.rddi.registerapp.model.WebServiceStatus;
 import com.rddi.registerapp.model.enums.ServiceProviderType;
 import com.rddi.registerapp.model.enums.WebServiceCategory;
@@ -27,4 +28,8 @@ public interface WebServiceManagement {
 	void rateWebService(Long webServiceId, Long rating);
 	
 	OptionalDouble getAverageWebServiceRating(WebService webService);
+	
+	void commentWebService(Long webServiceId, String author, String comment);
+	
+	List<WebServiceComment> getWebServiceComments(Long webServiceId);
 }

@@ -23,12 +23,14 @@ import com.rddi.registerapp.dto.GenerateServerRequest;
 import com.rddi.registerapp.dto.GenerateServerResponse;
 import com.rddi.registerapp.model.QWebService;
 import com.rddi.registerapp.model.WebService;
+import com.rddi.registerapp.model.WebServiceComment;
 import com.rddi.registerapp.model.WebServiceRating;
 import com.rddi.registerapp.model.WebServiceStatus;
 import com.rddi.registerapp.model.enums.ServiceProviderType;
 import com.rddi.registerapp.model.enums.WebServiceCategory;
 import com.rddi.registerapp.model.enums.WebServiceType;
 import com.rddi.registerapp.predicate.WebServiceStatusPredicates;
+import com.rddi.registerapp.repository.WebServiceCommentRepository;
 import com.rddi.registerapp.repository.WebServiceRatingRepository;
 import com.rddi.registerapp.repository.WebServiceRepository;
 import com.rddi.registerapp.repository.WebServiceStatusRepository;
@@ -45,6 +47,9 @@ public class WebServiceManagementImpl implements WebServiceManagement {
 	@Autowired
 	private WebServiceRatingRepository webServiceRatingRepository;
 	
+	@Autowired
+	private WebServiceCommentRepository webServiceCommentRepository;
+	
 	@Value( "${openapi.generator.url}" )
 	private String openApiGeneratorUrl;
 	
@@ -56,6 +61,14 @@ public class WebServiceManagementImpl implements WebServiceManagement {
 	}
 	
 	@Override
+	public List<WebServiceComment> getWebServiceComments(Long webServiceId) {
+		WebService webService = webServiceRepository.findById(webServiceId).orElse(null);
+		List<WebServiceComment> comments = webServiceCommentRepository.findAllByWebServiceOrderByIdDesc(webService);
+		
+		return comments;
+	}
+	
+	@Override
 	public OptionalDouble getAverageWebServiceRating(WebService webService) {
 		List<WebServiceRating> ratings = webServiceRatingRepository.findAllByWebService(webService);
 		OptionalDouble averageRating = ratings
@@ -64,6 +77,19 @@ public class WebServiceManagementImpl implements WebServiceManagement {
 				.average();
 		
 		return averageRating;
+	}
+	
+	@Override
+	public void commentWebService(Long webServiceId, String author, String comment) {
+		WebService webService = webServiceRepository.findById(webServiceId).orElse(null);
+		
+		WebServiceComment webServiceComment = new WebServiceComment();
+		webServiceComment.setAuthor(author);
+		webServiceComment.setComment(comment);
+		webServiceComment.setCreatedAt(new Date());
+		webServiceComment.setWebService(webService);
+		
+		webServiceCommentRepository.save(webServiceComment);
 	}
 	
 	@Override

@@ -47,6 +47,7 @@ $( document ).ready(function() {
 		}
 	   
 	   if ($(this).hasClass('discuss-navbar')) {
+		   	  loadComments();
 			  $('.content-panel').hide();
 			  $('.discuss-panel').show();
 		}
@@ -80,4 +81,62 @@ $( document ).ready(function() {
 	    $(".api-rating").hide();
 		$(".api-rated").show();
    });
+   
+   $('.btn-comment').on('click', function() {
+	    var webServiceIdValue =  Number($("#web-service-id").val());
+	    var authorValue =  $("#author").val();
+	    var commentValue = $("#comment").val();
+	    var action = $(".comment-form").attr("action");
+	    
+	    if (!commentValue || !authorValue) {
+	    	$(".comment-validation").show();
+	    	return;
+	    }
+	    
+	    var dataJson = JSON.stringify({webServiceId: webServiceIdValue, author: authorValue, comment: commentValue});
+	    
+	    $.ajax({
+	        type: 'POST',
+	        url: action,
+	        data: dataJson,
+	        contentType: "application/json",
+	        dataType: 'json',
+	        complete: function() {
+	    	    var authorValue =  $("#author").val("");
+	    	    var commentValue = $("#comment").val("");
+	    	    loadComments();
+	          } 
+	    });
+  });
 });
+
+function loadComments() {
+	  $(".comment-validation").hide();
+ 	  var webServiceIdValue =  Number($("#web-service-id").val());
+   	  $(".comment").remove();
+      $.get( "/ws/comments?webServiceId=" + webServiceIdValue, function( data ) {
+    	  $.each(data, function(i, item) {
+    		   $(".comments-section").append(
+    				   	'<div class="card bottom-margin comment">' +
+						  '<h5 class="card-header"><i>' + item.author + '</i></h5>' +
+						  '<div class="card-body">' +
+						    '<p class="card-text">' + item.comment + '</p>' +
+						  '</div>' +
+						  '<div class="card-footer text-muted">' 
+						  		+ formatDate(new Date(item.createdAt)) +
+						   '</div>'	+	
+						'</div>');
+    		});	
+	  });
+}
+
+function formatDate(date) {
+	  var hours = date.getHours();
+	  var minutes = date.getMinutes();
+	  var ampm = hours >= 12 ? 'PM' : 'AM';
+	  hours = hours % 12;
+	  hours = hours ? hours : 12; // the hour '0' should be '12'
+	  minutes = minutes < 10 ? '0'+minutes : minutes;
+	  var strTime = hours + ':' + minutes + ' ' + ampm;
+	  return date.getMonth()+1 + "/" + date.getDate() + "/" + date.getFullYear() + "  " + strTime;
+	}

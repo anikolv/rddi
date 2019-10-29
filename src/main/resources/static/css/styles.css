@@ -51,3 +51,7 @@
 .rate-popover {
   cursor: pointer;
 }
+
+.comment {
+	border-color: #3cc1ac;
+}

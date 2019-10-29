@@ -18,6 +18,7 @@ import com.rddi.registerapp.form.WebServiceForm;
 import com.rddi.registerapp.form.WebServiceSearchForm;
 import com.rddi.registerapp.model.ServiceProvider;
 import com.rddi.registerapp.model.WebService;
+import com.rddi.registerapp.model.WebServiceComment;
 import com.rddi.registerapp.model.WebServiceStatus;
 import com.rddi.registerapp.model.enums.ServiceProviderType;
 import com.rddi.registerapp.model.enums.WebServiceCategory;
@@ -56,8 +57,10 @@ public class HomeController {
 		Double lastMonthAvailabilityInPercentage = webServiceManagement.getLastMonthAvailabilityInPercentage(webService);
 		Double reliabilityPercentage = webServiceManagement.getReliabilityInPercentage(webService);
 		OptionalDouble averageRating = webServiceManagement.getAverageWebServiceRating(webService);
+		List<WebServiceComment> comments = webServiceManagement.getWebServiceComments(webServiceId);
 		
 		model.addAttribute("webService", webService);
+		model.addAttribute("numberOfComments", comments.size());
 		model.addAttribute("webServiceStatus", webServiceStatus);
 		model.addAttribute("lastMonthAvailabilityInPercentage", lastMonthAvailabilityInPercentage);
 		model.addAttribute("reliabilityPercentage", reliabilityPercentage);

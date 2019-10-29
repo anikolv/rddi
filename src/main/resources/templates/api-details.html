@@ -72,13 +72,13 @@
 				  	<!-- Evaluate it -->
 				  	<div class="content-panel еvaluate-panel" style="display:none;">
 				  		<h2 class="bottom-margin">
-				  			Last availability status:
+				  			Last availability status: <br/><br/>
 				  			<span class="badge badge-success" th:if="${webServiceStatus.available}">Online</span>
 							<span class="badge badge-danger" th:if="${not webServiceStatus.available}">Offline</span>
 						</h2>
 						
 						<h2 class="bottom-margin">
-				  			Average user rating:
+				  			Average user rating: <br/><br/>
 				  			<span th:if="${not averageRating.isPresent()}" class="badge badge-secondary">N/A</span>
 				  			
 							<span th:if="${averageRating.isPresent() and averageRating.getAsDouble() >= 4}" class="badge badge-success" 
@@ -89,6 +89,11 @@
 								  
 							<span th:if="${averageRating.isPresent() and averageRating.getAsDouble() < 2 }" class="badge badge-danger" 
 								  th:text="${#numbers.formatDecimal(averageRating.getAsDouble(), 1, 'DEFAULT', 1, 'DEFAULT') + ' / 5'}"></span>
+						</h2>
+						
+						<h2 class="bottom-margin">
+				  			Number of user discussions: <br/><br/>
+				  			<span class="badge badge-info" th:text="${numberOfComments}"></span>
 						</h2>
 						
 				  		<d3-progress-meter radius="100" th:attr="percentage=${lastMonthAvailabilityInPercentage/100}, current-text=${lastMonthAvailabilityInPercentage}" 
@@ -251,17 +256,27 @@
 				  	
 				  	<!-- Discuss it -->
 				  	<div class="content-panel discuss-panel" style="display:none;">
-				  		<div class="card bottom-margin">
-						  <div class="card-body">
-						    This is some text within a card body.
+				  	
+				  		<form class="bottom-margin comment-form" th:action="@{/ws/comment}" method="post">
+						  <div class="form-group">
+						    <label for="author">Author</label>
+						    <input type="text" class="form-control" id="author">
 						  </div>
-						</div>
-												
-						<div class="card bottom-margin">
-						  <div class="card-body">
-						    This is some text within a card body.
+						  <div class="form-group">
+						    <label for="comment">Comment</label>
+						    <textarea class="form-control" id="comment" rows="4"></textarea>
 						  </div>
+						  
+						 <div class="alert alert-danger comment-validation" role="alert" style="display:none;">
+ 							 Please fill in author and comment
 						</div>
+						  
+						  <button type="button" class="btn mb-2 custom-button btn-comment">Submit</button>
+						</form>
+				  	
+				  		<div class="comments-section">
+				  		</div>
+						
 				  	</div>
 				  	
 				  	<!-- Rate it -->
