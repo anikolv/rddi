@@ -50,7 +50,7 @@ $( document ).ready(function() {
 			   $.get( $("#contract-url").val(), function( data ) {
 				   var editor = ace.edit("editor");
 				   editor.setTheme("ace/theme/monokai");
-				   editor.session.setMode("ace/mode/json");
+				   editor.session.setMode("ace/mode/yaml");
 				   editor.setValue(JSON.stringify(data, null, '\t'));
 				   editor.setReadOnly(true);
 				 });

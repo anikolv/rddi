@@ -88,18 +88,18 @@
 					        <div class="service-provider-form">
 					          
 							  <div class="form-group">
-							    <label for="serviceProviderName">Name</label>
-							    <input type="text" class="form-control" th:field="*{serviceProviderName}" aria-describedby="serviceProviderNameHelp" placeholder="European Central Bank">
+							    <label for="serviceProviderName">Name*</label>
+							    <input required type="text" class="form-control required-sp" th:field="*{serviceProviderName}" aria-describedby="serviceProviderNameHelp" placeholder="European Central Bank">
 							    <small id="serviceProviderNameHelp" class="form-text text-muted">This is the service provider name</small>
 							  </div>
 							  <div class="form-group">
-							    <label for="serviceProviderDescription">Description</label>
-							    <input type="text" class="form-control" th:field="*{serviceProviderDescription}" aria-describedby="serviceProviderDescHelp" placeholder="European Central Bank IT HUB services">
+							    <label for="serviceProviderDescription">Description*</label>
+							    <input type="text" class="form-control required-sp" th:field="*{serviceProviderDescription}" aria-describedby="serviceProviderDescHelp" placeholder="European Central Bank IT HUB services">
 							    <small id="serviceProviderDescHelp" class="form-text text-muted">This is service provider short description</small>
 							  </div>
 							  <div class="form-group">
-							    <label for="serviceProviderType">Type</label>
-							    <select class="form-control" th:field="*{serviceProviderType}" aria-describedby="serviceProviderTypeHelp">
+							    <label for="serviceProviderType">Type*</label>
+							    <select class="form-control required-sp" th:field="*{serviceProviderType}" aria-describedby="serviceProviderTypeHelp">
 							    	<option th:each="type : ${serviceProviderTypes}" th:text="${type.name}" th:value="${type}"></option>
 							    </select>
 							    <small id="serviceProviderTypeHelp" class="form-text text-muted">This is the type of the service provider</small>
@@ -120,37 +120,38 @@
 					        <div class="web-service-form">
 							  
 							  <div class="form-group">
-							    <label for="apiName">Name</label>
-							    <input type="text" class="form-control" th:field="*{apiName}" aria-describedby="webApiNameHelp" placeholder="Currency conversion API">
+							    <label for="apiName">Name*</label>
+							    <input type="text" class="form-control required-ws" th:field="*{apiName}" aria-describedby="webApiNameHelp" placeholder="Currency conversion API">
 							    <small id="webApiNameHelp" class="form-text text-muted">This is the name of your API</small>
 							  </div>
 							  <div class="form-group">
-							    <label for="apiShortDescription">Short description</label>
-							    <input type="text" class="form-control" th:field="*{apiShortDescription}" aria-describedby="webApiShortDescHelp" placeholder="Exchange rates API for 30+ currencies">
+							    <label for="apiShortDescription">Short description*</label>
+							    <input type="text" class="form-control required-ws" th:field="*{apiShortDescription}" aria-describedby="webApiShortDescHelp" placeholder="Exchange rates API for 30+ currencies">
 							    <small id="webApiShortDescHelp" class="form-text text-muted">This is short description of your API</small>
 							  </div>
 							  <div class="form-group">
-							    <label for="apiDescription">Description</label>
-							    <input type="text" class="form-control" th:field="*{apiDescription}" aria-describedby="webApiDescHelp" placeholder="More detailed description">
-							    <small id="webApiDescHelp" class="form-text text-muted">This is detailed description of your API</small>
+							    <label for="apiDescription">Description*</label>
+							    <textarea class="form-control required-ws" th:field="*{apiDescription}" rows="4" aria-describedby="webApiDescHelp" placeholder="More detailed description"></textarea>
+<!-- 							    <input type="text" class="form-control required-ws" th:field="*{apiDescription}" aria-describedby="webApiDescHelp" placeholder="More detailed description">
+ -->							    <small id="webApiDescHelp" class="form-text text-muted">This is detailed description of your API</small>
 							  </div>
 							  <div class="form-group">
-							    <label for="apiCategory">Category</label>
-							    <select class="form-control" th:field="*{apiCategory}" aria-describedby="webApiCategoryHelp">
+							    <label for="apiCategory">Category*</label>
+							    <select class="form-control required-ws" th:field="*{apiCategory}" aria-describedby="webApiCategoryHelp">
 							    	<option th:each="category : ${webServiceCategories}" th:text="${category.name}" th:value="${category}"></option>
 							    </select>
 							    <small id="webApiCategoryHelp" class="form-text text-muted">This is the domain in which your API operates</small>
 							  </div>
 							  <div class="form-group">
-							    <label for="apiType">Type</label>
-							    <select class="form-control" th:field="*{apiType}" aria-describedby="webApiTypeHelp">
+							    <label for="apiType">Type*</label>
+							    <select class="form-control required-ws" th:field="*{apiType}" aria-describedby="webApiTypeHelp">
 							    	<option th:each="type : ${webServiceTypes}" th:text="${type.name}" th:value="${type}"></option>
 							    </select>
 							    <small id="webApiTypeHelp" class="form-text text-muted">This is the type of the service provider</small>
 							  </div>
 							  <div class="form-group">
-							    <label for="apiVersion">Version</label>
-							    <input type="text" class="form-control" th:field="*{apiVersion}" aria-describedby="webApiVersionHelp" placeholder="1.0.0">
+							    <label for="apiVersion">Version*</label>
+							    <input type="text" class="form-control required-ws" th:field="*{apiVersion}" aria-describedby="webApiVersionHelp" placeholder="1.0.0">
 							    <small id="webApiVersionHelp" class="form-text text-muted">This is the version of your API</small>
 							  </div>
 							  <div class="form-group">
@@ -159,8 +160,8 @@
 							    <small id="webApiVersionDocHelp" class="form-text text-muted">This is URL to your API reference documentation</small>
 							  </div>
 							  <div class="form-group">
-							    <label for="apiSpecUrl">Spec URL</label>
-							    <input type="text" class="form-control" th:field="*{apiSpecUrl}" aria-describedby="webApiSpecHelp" placeholder="https://petstore.swagger.io/v2/swagger.json">
+							    <label for="apiSpecUrl">Spec URL*</label>
+							    <input type="text" class="form-control required-ws" th:field="*{apiSpecUrl}" aria-describedby="webApiSpecHelp" placeholder="https://petstore.swagger.io/v2/swagger.json">
 							    <small id="webApiSpecHelp" class="form-text text-muted">This is the URL to your OpenAPI 3.0 specification in either YAML or JSON format</small>
 							  </div>
 					        </div>
