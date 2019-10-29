@@ -77,13 +77,13 @@
 				  	<!-- Evaluate it -->
 				  	<div class="content-panel еvaluate-panel" style="display:none;">
 				  		<h2 class="bottom-margin">
-				  			Last availability status: <br/><br/>
+				  			Status:
 				  			<span class="badge badge-success" th:if="${webServiceStatus.available}">Online</span>
 							<span class="badge badge-danger" th:if="${not webServiceStatus.available}">Offline</span>
 						</h2>
 						
 						<h2 class="bottom-margin">
-				  			Average user rating: <br/><br/>
+				  			Rating: 
 				  			<span th:if="${not averageRating.isPresent()}" class="badge badge-secondary">N/A</span>
 				  			
 							<span th:if="${averageRating.isPresent() and averageRating.getAsDouble() >= 4}" class="badge badge-success" 
@@ -97,7 +97,7 @@
 						</h2>
 						
 						<h2 class="bottom-margin">
-				  			Number of user discussions: <br/><br/>
+				  			Discussions: 
 				  			<span class="badge badge-info" th:text="${numberOfComments}"></span>
 						</h2>
 						
