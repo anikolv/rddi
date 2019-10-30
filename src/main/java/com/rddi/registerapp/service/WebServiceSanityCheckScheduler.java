@@ -1,6 +1,8 @@
 package com.rddi.registerapp.service;
 
+import java.io.IOException;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Date;
 import java.util.List;
@@ -20,6 +22,9 @@ public class WebServiceSanityCheckScheduler {
 	@Autowired
 	private WebServiceRepository webServiceRepository;
 	
+	@Autowired
+	private WebServiceManagement webServiceManagement;
+	
 	@Scheduled(cron = "0 0 12 * * *")
 	public void performSanityCheck() {
 	    System.out.println("[SANITY CHECK SCHEDULER START]");
@@ -27,23 +32,11 @@ public class WebServiceSanityCheckScheduler {
 		List<WebService> webServices = webServiceRepository.findAllWithFetchedStatuses();
 		webServices.forEach(webService -> {
 			try {
-				URL url = new URL(webService.getOpenApiContract());
-				HttpURLConnection http = (HttpURLConnection)url.openConnection();
-				
-				WebServiceStatus status = new WebServiceStatus();
-				status.setHttpStatusCode(String.valueOf(http.getResponseCode()));
-				status.setHttpStatusMessage(http.getResponseMessage());
-				status.setAvailable(
-						String.valueOf(http.getResponseCode()).equals(String.valueOf(HttpStatus.OK.value())));
-				status.setCheckedAt(new Date());
-				
-				webService.addStatus(status);
-				webServiceRepository.save(webService);
+				webServiceManagement.checkWebServiceAvailability(webService);
 			} catch (Exception e) {
 				System.out.println("[SANITY CHECK ERROR]" + e.getMessage());
 			}
 		});
 		 System.out.println("[SANITY CHECK SCHEDULER END]");
 	}
-
 }

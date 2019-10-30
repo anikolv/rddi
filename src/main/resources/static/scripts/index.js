@@ -9,18 +9,23 @@ $( document ).ready(function() {
 	   initFirstModalForm();
 	 });
    
-   $( ".btn-add-api" ).click(function() {	
+   $( ".btn-add-api" ).click(function() {		   
 	   if (!validate(".required-ws")) {
 			var contractUrl = $("#apiSpecUrl").val();
 			
-		    $.get( "/ws/validate?contractUrl=" + contractUrl, function( data ) {
+		 	$(".buttons-bar").hide();
+			$(".loader").show();
+			   
+		    $.get( "/ws/validate?contractUrl=" + contractUrl, function( data ) {			   
 		   	   var schemaValidationMessages = data.schemaValidationMessages;
 		       if (schemaValidationMessages != null) {
 		      	   var error = schemaValidationMessages.find((element) => {
 		       		  return element.level == "error";
 		       		});
 		      	   $(".api-spec-error").text(error.message).show(); 
-		      	   validationError = true;
+		      	   
+		    	   $(".buttons-bar").show();
+		    	   $(".loader").hide();
 		       } else {
 		    	   $(".api-spec-error").text("").hide(); 
 		    	   $( ".add-api-form" ).submit();

@@ -1,5 +1,6 @@
 package com.rddi.registerapp.controller;
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.OptionalDouble;
@@ -87,16 +88,17 @@ public class HomeController {
 	}
 	
 	@PostMapping(value="/addApi")
-	public String addApi(@ModelAttribute(value="webServiceForm") WebServiceForm webServiceForm) {
+	public String addApi(@ModelAttribute(value = "webServiceForm") WebServiceForm webServiceForm, Model model)
+			throws IOException {
 		ServiceProvider serviceProvider = new ServiceProvider();
 		serviceProvider.setName(webServiceForm.getServiceProviderName());
 		serviceProvider.setDescription(webServiceForm.getServiceProviderDescription());
 		serviceProvider.setType(webServiceForm.getServiceProviderType());
 		serviceProvider.setWebsite(webServiceForm.getServiceProviderWebsite());
 		serviceProvider.setIconUrl(webServiceForm.getServiceProviderNameIconUrl());
-		
+
 		serviceProviderRepository.save(serviceProvider);
-		
+
 		WebService webService = new WebService();
 		webService.setName(webServiceForm.getApiName());
 		webService.setShortDescription(webServiceForm.getApiShortDescription());
@@ -106,11 +108,15 @@ public class HomeController {
 		webService.setVersion(webServiceForm.getApiVersion());
 		webService.setDocumentationUrl(webServiceForm.getApiDocUrl());
 		webService.setOpenApiContract(webServiceForm.getApiSpecUrl());
-		
+
 		webService.addServiceProvider(serviceProvider);
-		
+
 		webServiceRepository.save(webService);
-		
+
+		webServiceManagement.checkWebServiceAvailability(webService);
+
+		initModel(model);
+
 		return "index";
 	}
 

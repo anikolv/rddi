@@ -1,5 +1,6 @@
 package com.rddi.registerapp.service;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.OptionalDouble;
 
@@ -35,4 +36,6 @@ public interface WebServiceManagement {
 	List<WebServiceComment> getWebServiceComments(Long webServiceId);
 	
 	ValidateContractResponse validateWebServiceContract(String contractUrl);
+	
+	void checkWebServiceAvailability(WebService webService) throws IOException;
 }

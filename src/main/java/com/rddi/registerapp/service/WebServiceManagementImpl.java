@@ -1,5 +1,8 @@
 package com.rddi.registerapp.service;
 
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -11,6 +14,7 @@ import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.client.RestTemplate;
@@ -225,4 +229,19 @@ public class WebServiceManagementImpl implements WebServiceManagement {
 		return reliabilityInPercentage;
 	}
 	
+	@Override
+	public void checkWebServiceAvailability(WebService webService) throws IOException {
+		URL url = new URL(webService.getOpenApiContract());
+		HttpURLConnection http = (HttpURLConnection)url.openConnection();
+		
+		WebServiceStatus status = new WebServiceStatus();
+		status.setHttpStatusCode(String.valueOf(http.getResponseCode()));
+		status.setHttpStatusMessage(http.getResponseMessage());
+		status.setAvailable(
+				String.valueOf(http.getResponseCode()).equals(String.valueOf(HttpStatus.OK.value())));
+		status.setCheckedAt(new Date());
+		
+		webService.addStatus(status);
+		webServiceRepository.save(webService);
+	}
 }
