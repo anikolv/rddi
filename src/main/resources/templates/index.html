@@ -65,15 +65,16 @@
 			<div class="alert alert-success api-created-alert" role="alert" th:if="${apiCreated}">Congratulations! Your API is now part of the RestHub register!</div>
 			
 			<!-- Search results grid -->
-			<div class="card-columns" th:if="${webServicesList != null and not #lists.isEmpty(webServicesList)}">
-				<div class="card" style="width: 17rem;" th:each="webService : ${webServicesList}">
-				  	<img class="card-img-top" th:attr="src=${webService.serviceProvider.iconUrl}"  alt="Card image cap">
+			<div class="cards-container" th:if="${webServicesList != null and not #lists.isEmpty(webServicesList)}">
+				 <div class="card card-item" th:each="webService : ${webServicesList}">
+				  	<img class="card-img-top icon-small" th:attr="src=${webService.serviceProvider.iconUrl}" alt="Card image cap">
 				  	<div class="card-body">
-				    	<h5 class="card-title" th:text="${webService.name}"></h5>
-				    	<p class="card-text" th:text="${webService.shortDescription}">.</p>
-				    	<a th:attr="href=${'/api/details/' + webService.id}" class="btn btn-primary custom-button">Check it out</a>
+				    	<h5 class="card-title card-item-title" th:text="${webService.name}"></h5>
+				    	<p class="card-text card-item-text" th:text="${webService.shortDescription}">.</p>
+				    	<a th:attr="href=${'/api/details/' + webService.id}" class="btn custom-button">Check it out</a>
 			  		</div>
 				</div>
+				
 			</div>
 			
 			<!-- Modal -->
@@ -115,7 +116,7 @@
 							  </div>
 							  <div class="form-group">
 							    <label for="serviceProviderNameIconUrl">Icon</label>
-							    <input type="text" class="form-control" th:field="*{serviceProviderNameIconUrl}" aria-describedby="serviceProviderIconHelp" placeholder="https://avatars0.githubusercontent.com/u/7658037?s=400&v=4">
+							    <input type="text" class="form-control required-sp" th:field="*{serviceProviderNameIconUrl}" aria-describedby="serviceProviderIconHelp" placeholder="https://avatars0.githubusercontent.com/u/7658037?s=400&v=4">
 							    <small id="serviceProviderIconHelp" class="form-text text-muted">URL for your company logo. This helps making your API more recognizable</small>
 							  </div>
 					        </div>
@@ -130,7 +131,7 @@
 							  </div>
 							  <div class="form-group">
 							    <label for="apiShortDescription">Short description*</label>
-							    <input type="text" class="form-control required-ws" th:field="*{apiShortDescription}" aria-describedby="webApiShortDescHelp" placeholder="Exchange rates API for 30+ currencies">
+							    <input maxlength="80" type="text" class="form-control required-ws" th:field="*{apiShortDescription}" aria-describedby="webApiShortDescHelp" placeholder="Exchange rates API for 30+ currencies">
 							    <small id="webApiShortDescHelp" class="form-text text-muted">This is short description of your API</small>
 							  </div>
 							  <div class="form-group">
