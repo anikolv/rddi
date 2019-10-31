@@ -46,6 +46,8 @@ public class HomeController {
 				webServiceSearchForm.getApiCategory(), webServiceSearchForm.getServiceProviderType());
 		
 		initModel(model);
+		
+		model.addAttribute("webServiceSearchForm", webServiceSearchForm);
 		model.addAttribute("webServicesList", webServices);
 		
 		return "index";

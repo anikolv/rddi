@@ -17,22 +17,22 @@
 			
 			<!-- Search form -->
 			<form class="bottom-margin search-api-form" th:object="${webServiceSearchForm}" th:action="@{/search}"  method="post">
-				<div class="input-group mb-4 border rounded-pill p-1">
+				<div class="input-group mb-4 border search-field p-1">
 		            <div class="input-group-prepend border-0">
 		              <button id="button-addon4" type="button" class="btn btn-link text-info"><i class="fa fa-search"></i></button>
 		            </div>
-		            <input type="search" th:field="*{searchTerm}" placeholder="Search apis..." aria-describedby="button-addon4" class="form-control bg-none border-0">
+		            <input type="search" th:field="*{searchTerm}" placeholder="Tell us what API do you need..." aria-describedby="button-addon4" class="form-control bg-none border-0">
 	            </div>
 	          
 	            <div class="container">
 		          <div class="row">
 		          	<div class="col-md-4">
-		          		<label for="apiCategory">Api category</label>
+		          		<label for="apiCategory">API Category</label>
 						 <select class="form-control" th:field="*{apiCategory}" aria-describedby="categoryFilterHelp">
 						 	<option value="">-----------</option>
 							<option th:each="category : ${webServiceCategories}" th:text="${category.name}" th:value="${category}"></option>
 						</select>
-						<small id="categoryFilterHelp" class="form-text text-muted">Specify API domain</small>
+						<small id="categoryFilterHelp" class="form-text text-muted">Field of operation</small>
 		          	</div>
 		          	
 		          	<div class="col-md-4">
@@ -41,7 +41,7 @@
 						 	<option value="">-----------</option>
 							<option th:each="type : ${webServiceTypes}" th:text="${type.name}" th:value="${type}"></option>
 						</select>
-						<small id="typeFilterHelp" class="form-text text-muted">Specify API type</small>
+						<small id="typeFilterHelp" class="form-text text-muted">Type of deployment</small>
 		          	</div>
 		          	
 		          	<div class="col-md-4">
@@ -50,7 +50,7 @@
 						 	<option value="">-----------</option>
 							<option th:each="type : ${serviceProviderTypes}" th:text="${type.name}" th:value="${type}"></option>
 						</select>
-						<small id="typeFilterHelp" class="form-text text-muted">Specify provider type</small>
+						<small id="typeFilterHelp" class="form-text text-muted">Who provides it</small>
 		          	</div>
 		          </div>
 				</div>
