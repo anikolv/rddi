@@ -37,6 +37,13 @@ $( document ).ready(function() {
    $( ".btn-search" ).click(function() {
 	   $( ".search-api-form" ).submit();
 	 });
+   
+   if($(".api-created-alert").is(":visible")) {
+	   setTimeout(function() {
+	        $(".api-created-alert").fadeOut();
+	    }, 2000);
+   }; 
+   
 });
 
 function validate(validationClass) {

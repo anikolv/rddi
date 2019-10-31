@@ -116,6 +116,7 @@ public class HomeController {
 		webServiceManagement.checkWebServiceAvailability(webService);
 
 		initModel(model);
+		model.addAttribute("apiCreated", true);
 
 		return "index";
 	}

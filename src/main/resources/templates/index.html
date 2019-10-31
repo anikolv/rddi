@@ -59,6 +59,8 @@
 				<a href="#" class="btn custom-button btn-lg active" role="button" aria-pressed="true" data-toggle="modal" data-target="#add-api-modal">Add API</a>	
 			</div>
 			
+			<div class="alert alert-success api-created-alert" role="alert" th:if="${apiCreated}">Congratulations! Your API is now part of the RestHub register!</div>
+			
 			<!-- Search results grid -->
 			<div class="card-columns" th:if="${webServicesList != null and not #lists.isEmpty(webServicesList)}">
 				<div class="card" style="width: 17rem;" th:each="webService : ${webServicesList}">
