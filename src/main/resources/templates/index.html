@@ -29,6 +29,7 @@
 		          	<div class="col-md-4">
 		          		<label for="apiCategory">Api category</label>
 						 <select class="form-control" th:field="*{apiCategory}" aria-describedby="categoryFilterHelp">
+						 	<option value="">-----------</option>
 							<option th:each="category : ${webServiceCategories}" th:text="${category.name}" th:value="${category}"></option>
 						</select>
 						<small id="categoryFilterHelp" class="form-text text-muted">Specify API domain</small>
@@ -37,6 +38,7 @@
 		          	<div class="col-md-4">
 		          		<label for="apiType">Api Deployment Type</label>
 						 <select class="form-control" th:field="*{apiType}" aria-describedby="typeFilterHelp">
+						 	<option value="">-----------</option>
 							<option th:each="type : ${webServiceTypes}" th:text="${type.name}" th:value="${type}"></option>
 						</select>
 						<small id="typeFilterHelp" class="form-text text-muted">Specify API type</small>
@@ -45,6 +47,7 @@
 		          	<div class="col-md-4">
 		          		<label for="serviceProviderType">Service provider type</label>
 						 <select class="form-control" th:field="*{serviceProviderType}" aria-describedby="typeFilterHelp">
+						 	<option value="">-----------</option>
 							<option th:each="type : ${serviceProviderTypes}" th:text="${type.name}" th:value="${type}"></option>
 						</select>
 						<small id="typeFilterHelp" class="form-text text-muted">Specify provider type</small>
