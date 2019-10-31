@@ -47,11 +47,22 @@ $( document ).ready(function() {
 			  $('.content-panel').hide();
 			  $('.inspect-panel').show();
 			  
-			   $.get( $("#contract-url").val(), function( data ) {
+			  var contactUrl = $("#contract-url").val();
+			   $.get( contactUrl, function( data ) {
 				   var editor = ace.edit("editor");
 				   editor.setTheme("ace/theme/monokai");
-				   editor.session.setMode("ace/mode/yaml");
-				   editor.setValue(JSON.stringify(data, null, '\t'));
+				   
+				   if (contactUrl.endsWith("json")) {
+					   editor.session.setMode("ace/mode/json");
+					   var jsonString = JSON.stringify(data, null, '\t');
+					   editor.setValue(jsonString);
+				   } else {
+					   editor.session.setMode("ace/mode/yaml");
+					   var spaces = parseInt(4 || 2, 10);
+					   var object  = YAML.parse(data);
+				       var prettified = YAML.stringify(object, 100, spaces);
+				       editor.setValue(prettified);
+				   }
 				   editor.setReadOnly(true);
 				 });
 		}
