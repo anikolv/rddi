@@ -83,6 +83,15 @@
   border-color: #3cc1ac !important;
 }
 
+.nav-link:hover {
+	color: #4df0d6;
+}
+
+.nav-link.active {
+	font-size: larger;
+}
+
+
 div [class^="col-"]{
   padding-left:5px;
   padding-right:5px;

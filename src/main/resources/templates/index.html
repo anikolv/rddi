@@ -13,7 +13,9 @@
 	<body>
 		<div class="jumbotron d-flex align-items-center min-vh-100 custom-layout">
 		  <div class="container text-center">
-		   	<img src="images/FullColor_1024x1024_72dpi.jpg" class="img-fluid langing-logo bottom-margin">
+			  <a href="/">
+			  	<img src="images/FullColor_1024x1024_72dpi.jpg" class="img-fluid langing-logo bottom-margin">
+			  </a>
 			
 			<!-- Search form -->
 			<form class="bottom-margin search-api-form" th:object="${webServiceSearchForm}" th:action="@{/search}"  method="post">
