@@ -19,10 +19,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.rddi.registerapp.dto.ApiSearchResponse;
 import com.rddi.registerapp.dto.ApiWebService;
+import com.rddi.registerapp.dto.ApiWebServiceDetails;
+import com.rddi.registerapp.dto.ApiWebServiceDetailsResponse;
 import com.rddi.registerapp.form.WebServiceForm;
 import com.rddi.registerapp.model.ServiceProvider;
 import com.rddi.registerapp.model.WebService;
-import com.rddi.registerapp.model.WebServiceComment;
 import com.rddi.registerapp.model.WebServiceStatus;
 import com.rddi.registerapp.model.enums.ServiceProviderType;
 import com.rddi.registerapp.model.enums.WebServiceCategory;
@@ -62,17 +63,21 @@ public class RestEntrypointController {
 		return new ResponseEntity<ApiSearchResponse>(new ApiSearchResponse(apiWebServices), HttpStatus.OK);
 	}
 	
-	// aggregated details
 	@GetMapping(value="/details")
-	public String apiDetails(@RequestParam("webServiceId") Long webServiceId) {
+	public ResponseEntity<ApiWebServiceDetailsResponse> apiDetails(@RequestParam("webServiceId") Long webServiceId) {
 		WebService webService = webServiceRepository.findById(webServiceId).orElse(null);
+		
+		ApiWebServiceDetails apiWebService = ApiWebServiceDetails.from(webService);
+		
 		WebServiceStatus webServiceStatus = webServiceManagement.getLastWebServiceStatus(webService);
 		Double lastMonthAvailabilityInPercentage = webServiceManagement.getLastMonthAvailabilityInPercentage(webService);
 		Double reliabilityPercentage = webServiceManagement.getReliabilityInPercentage(webService);
 		OptionalDouble averageRating = webServiceManagement.getAverageWebServiceRating(webService);
-		List<WebServiceComment> comments = webServiceManagement.getWebServiceComments(webServiceId);
 		
-		return "api-details";
+		apiWebService.addEvaluationDetails(webServiceStatus, lastMonthAvailabilityInPercentage, reliabilityPercentage, averageRating.orElse(0));
+		
+		return new ResponseEntity<ApiWebServiceDetailsResponse>(new ApiWebServiceDetailsResponse(apiWebService),
+				HttpStatus.OK);
 	}
 	
 	//maybe add as well?
