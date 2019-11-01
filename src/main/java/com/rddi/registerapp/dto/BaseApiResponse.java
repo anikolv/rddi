@@ -8,6 +8,13 @@ public class BaseApiResponse {
 
 	private Boolean success = Boolean.TRUE;
 	private String errorMessage;
+	
+	public BaseApiResponse() {}
+	
+	public BaseApiResponse(Boolean success, String errorMessage) {
+		this.success = success;
+		this.errorMessage = errorMessage;
+	}
 
 	public Boolean getSuccess() {
 		return success;

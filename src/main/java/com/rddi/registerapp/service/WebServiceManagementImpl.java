@@ -27,6 +27,7 @@ import com.rddi.registerapp.dto.GenerateServerRequest;
 import com.rddi.registerapp.dto.GenerateServerResponse;
 import com.rddi.registerapp.dto.ValidateContractResponse;
 import com.rddi.registerapp.model.QWebService;
+import com.rddi.registerapp.model.ServiceProvider;
 import com.rddi.registerapp.model.WebService;
 import com.rddi.registerapp.model.WebServiceComment;
 import com.rddi.registerapp.model.WebServiceRating;
@@ -35,6 +36,7 @@ import com.rddi.registerapp.model.enums.ServiceProviderType;
 import com.rddi.registerapp.model.enums.WebServiceCategory;
 import com.rddi.registerapp.model.enums.WebServiceType;
 import com.rddi.registerapp.predicate.WebServiceStatusPredicates;
+import com.rddi.registerapp.repository.ServiceProviderRepository;
 import com.rddi.registerapp.repository.WebServiceCommentRepository;
 import com.rddi.registerapp.repository.WebServiceRatingRepository;
 import com.rddi.registerapp.repository.WebServiceRepository;
@@ -54,6 +56,9 @@ public class WebServiceManagementImpl implements WebServiceManagement {
 	
 	@Autowired
 	private WebServiceCommentRepository webServiceCommentRepository;
+	
+	@Autowired
+	private ServiceProviderRepository serviceProviderRepository;
 	
 	@Value( "${openapi.generator.url}" )
 	private String openApiGeneratorUrl;
@@ -243,5 +248,38 @@ public class WebServiceManagementImpl implements WebServiceManagement {
 		
 		webService.addStatus(status);
 		webServiceRepository.save(webService);
+	}
+
+	@Override
+	public Long createWebService(String serviceProviderName, String serviceProviderDescription,
+			ServiceProviderType serviceProviderType, String serviceProviderWebsite, String serviceProviderNameIconUrl,
+			String apiName, String apiShortDescription, String apiDescription, WebServiceCategory apiCategory,
+			WebServiceType apiType, String apiVersion, String apiDocUrl, String apiSpecUrl) throws IOException {
+		ServiceProvider serviceProvider = new ServiceProvider();
+		serviceProvider.setName(serviceProviderName);
+		serviceProvider.setDescription(serviceProviderDescription);
+		serviceProvider.setType(serviceProviderType);
+		serviceProvider.setWebsite(serviceProviderWebsite);
+		serviceProvider.setIconUrl(serviceProviderNameIconUrl);
+
+		serviceProviderRepository.save(serviceProvider);
+
+		WebService webService = new WebService();
+		webService.setName(apiName);
+		webService.setShortDescription(apiShortDescription);
+		webService.setDescription(apiDescription);
+		webService.setCategory(apiCategory);
+		webService.setType(apiType);
+		webService.setVersion(apiVersion);
+		webService.setDocumentationUrl(apiDocUrl);
+		webService.setOpenApiContract(apiSpecUrl);
+
+		webService.addServiceProvider(serviceProvider);
+
+		webServiceRepository.save(webService);
+
+		checkWebServiceAvailability(webService);
+		
+		return webService.getId();
 	}
 }

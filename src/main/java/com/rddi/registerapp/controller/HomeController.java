@@ -92,30 +92,12 @@ public class HomeController {
 	@PostMapping(value="/addApi")
 	public String addApi(@ModelAttribute(value = "webServiceForm") WebServiceForm webServiceForm, Model model)
 			throws IOException {
-		ServiceProvider serviceProvider = new ServiceProvider();
-		serviceProvider.setName(webServiceForm.getServiceProviderName());
-		serviceProvider.setDescription(webServiceForm.getServiceProviderDescription());
-		serviceProvider.setType(webServiceForm.getServiceProviderType());
-		serviceProvider.setWebsite(webServiceForm.getServiceProviderWebsite());
-		serviceProvider.setIconUrl(webServiceForm.getServiceProviderNameIconUrl());
-
-		serviceProviderRepository.save(serviceProvider);
-
-		WebService webService = new WebService();
-		webService.setName(webServiceForm.getApiName());
-		webService.setShortDescription(webServiceForm.getApiShortDescription());
-		webService.setDescription(webServiceForm.getApiDescription());
-		webService.setCategory(webServiceForm.getApiCategory());
-		webService.setType(webServiceForm.getApiType());
-		webService.setVersion(webServiceForm.getApiVersion());
-		webService.setDocumentationUrl(webServiceForm.getApiDocUrl());
-		webService.setOpenApiContract(webServiceForm.getApiSpecUrl());
-
-		webService.addServiceProvider(serviceProvider);
-
-		webServiceRepository.save(webService);
-
-		webServiceManagement.checkWebServiceAvailability(webService);
+		webServiceManagement.createWebService(webServiceForm.getServiceProviderName(),
+				webServiceForm.getServiceProviderDescription(), webServiceForm.getServiceProviderType(),
+				webServiceForm.getServiceProviderWebsite(), webServiceForm.getServiceProviderNameIconUrl(),
+				webServiceForm.getApiName(), webServiceForm.getApiShortDescription(), webServiceForm.getApiDescription(),
+				webServiceForm.getApiCategory(), webServiceForm.getApiType(), webServiceForm.getApiVersion(),
+				webServiceForm.getApiDocUrl(), webServiceForm.getApiSpecUrl());
 
 		initModel(model);
 		model.addAttribute("apiCreated", true);

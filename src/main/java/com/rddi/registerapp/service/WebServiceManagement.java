@@ -14,12 +14,12 @@ import com.rddi.registerapp.model.enums.WebServiceType;
 
 public interface WebServiceManagement {
 
-	public List<WebService> searchWebServices(String searchTerm, WebServiceType webServiceType,
+	List<WebService> searchWebServices(String searchTerm, WebServiceType webServiceType,
 			WebServiceCategory webServiceCategory, ServiceProviderType serviceProviderType);
 	
-	public byte[] generateClient(Long webServiceId, String clientType);
+	byte[] generateClient(Long webServiceId, String clientType);
 	
-	public byte[] generateServer(Long webServiceId, String serverType);
+	byte[] generateServer(Long webServiceId, String serverType);
 
 	WebServiceStatus getLastWebServiceStatus(WebService webService);
 	
@@ -38,4 +38,9 @@ public interface WebServiceManagement {
 	ValidateContractResponse validateWebServiceContract(String contractUrl);
 	
 	void checkWebServiceAvailability(WebService webService) throws IOException;
+	
+	Long createWebService(String serviceProviderName, String serviceProviderDescription,
+			ServiceProviderType serviceProviderType, String serviceProviderWebsite, String serviceProviderNameIconUrl,
+			String apiName, String apiShortDescription, String apiDescription, WebServiceCategory apiCategory,
+			WebServiceType apiType, String apiVersion, String apiDocUrl, String apiSpecUrl) throws IOException;
 }

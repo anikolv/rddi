@@ -9,20 +9,22 @@ import java.util.OptionalDouble;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.rddi.registerapp.dto.AddApiRequest;
+import com.rddi.registerapp.dto.ApiCreateResponse;
 import com.rddi.registerapp.dto.ApiSearchResponse;
 import com.rddi.registerapp.dto.ApiWebService;
 import com.rddi.registerapp.dto.ApiWebServiceDetails;
 import com.rddi.registerapp.dto.ApiWebServiceDetailsResponse;
-import com.rddi.registerapp.form.WebServiceForm;
-import com.rddi.registerapp.model.ServiceProvider;
+import com.rddi.registerapp.dto.BaseApiResponse;
+import com.rddi.registerapp.exception.ApiValidationException;
 import com.rddi.registerapp.model.WebService;
 import com.rddi.registerapp.model.WebServiceStatus;
 import com.rddi.registerapp.model.enums.ServiceProviderType;
@@ -80,36 +82,37 @@ public class RestEntrypointController {
 				HttpStatus.OK);
 	}
 	
-	//maybe add as well?
-	@PostMapping(value="/add")
-	public String addApi(@ModelAttribute(value = "webServiceForm") WebServiceForm webServiceForm, Model model)
-			throws IOException {
-		ServiceProvider serviceProvider = new ServiceProvider();
-		serviceProvider.setName(webServiceForm.getServiceProviderName());
-		serviceProvider.setDescription(webServiceForm.getServiceProviderDescription());
-		serviceProvider.setType(webServiceForm.getServiceProviderType());
-		serviceProvider.setWebsite(webServiceForm.getServiceProviderWebsite());
-		serviceProvider.setIconUrl(webServiceForm.getServiceProviderNameIconUrl());
+	@PostMapping(value = "/create")
+	public ResponseEntity<ApiCreateResponse> addApi(@RequestBody AddApiRequest apiRequest)
+			throws IOException, ApiValidationException {
+		apiRequest.validate(webServiceManagement);
 
-		serviceProviderRepository.save(serviceProvider);
+		Long webServiceId = webServiceManagement.createWebService(apiRequest.getServiceProviderName(),
+				apiRequest.getServiceProviderDescription(), apiRequest.getServiceProviderType(),
+				apiRequest.getServiceProviderWebsite(), apiRequest.getServiceProviderNameIconUrl(),
+				apiRequest.getApiName(), apiRequest.getApiShortDescription(), apiRequest.getApiDescription(),
+				apiRequest.getApiCategory(), apiRequest.getApiType(), apiRequest.getApiVersion(),
+				apiRequest.getApiDocUrl(), apiRequest.getApiSpecUrl());
 
-		WebService webService = new WebService();
-		webService.setName(webServiceForm.getApiName());
-		webService.setShortDescription(webServiceForm.getApiShortDescription());
-		webService.setDescription(webServiceForm.getApiDescription());
-		webService.setCategory(webServiceForm.getApiCategory());
-		webService.setType(webServiceForm.getApiType());
-		webService.setVersion(webServiceForm.getApiVersion());
-		webService.setDocumentationUrl(webServiceForm.getApiDocUrl());
-		webService.setOpenApiContract(webServiceForm.getApiSpecUrl());
-
-		webService.addServiceProvider(serviceProvider);
-
-		webServiceRepository.save(webService);
-
-		webServiceManagement.checkWebServiceAvailability(webService);
-
-		return "index";
+		return new ResponseEntity<ApiCreateResponse>(new ApiCreateResponse(webServiceId), HttpStatus.CREATED);
+	}
+	
+	@ExceptionHandler(ApiValidationException.class)
+	public ResponseEntity<BaseApiResponse> handleApiValidationException(ApiValidationException ex) {
+		return new ResponseEntity<BaseApiResponse>(new BaseApiResponse(Boolean.FALSE, ex.getMessage()),
+				HttpStatus.BAD_REQUEST);
+	}
+	
+	@ExceptionHandler(IOException.class)
+	public ResponseEntity<BaseApiResponse> handleIOException(IOException ex) {
+		return new ResponseEntity<BaseApiResponse>(new BaseApiResponse(Boolean.FALSE, ex.getMessage()),
+				HttpStatus.INTERNAL_SERVER_ERROR);
+	}
+	
+	@ExceptionHandler(RuntimeException.class)
+	public ResponseEntity<BaseApiResponse> handleRuntimeException(RuntimeException ex) {
+		return new ResponseEntity<BaseApiResponse>(new BaseApiResponse(Boolean.FALSE, ex.getMessage()),
+				HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 
 }
