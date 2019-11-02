@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.OptionalDouble;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -40,6 +42,8 @@ import io.swagger.annotations.ApiOperation;
 @RequestMapping(value = "/api")
 @Api(tags = "RestHub web API")
 public class RestEntrypointController {
+	
+	Logger logger = LoggerFactory.getLogger(RestEntrypointController.class);
 	
 	@Autowired
 	private WebServiceRepository webServiceRepository;
@@ -102,18 +106,21 @@ public class RestEntrypointController {
 	
 	@ExceptionHandler(ApiValidationException.class)
 	public ResponseEntity<BaseApiResponse> handleApiValidationException(ApiValidationException ex) {
+		logger.error(ex.getMessage());
 		return new ResponseEntity<BaseApiResponse>(new BaseApiResponse(Boolean.FALSE, ex.getMessage()),
 				HttpStatus.BAD_REQUEST);
 	}
 	
 	@ExceptionHandler(IOException.class)
 	public ResponseEntity<BaseApiResponse> handleIOException(IOException ex) {
+		logger.error(ex.getMessage());
 		return new ResponseEntity<BaseApiResponse>(new BaseApiResponse(Boolean.FALSE, ex.getMessage()),
 				HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 	
 	@ExceptionHandler(RuntimeException.class)
 	public ResponseEntity<BaseApiResponse> handleRuntimeException(RuntimeException ex) {
+		logger.error(ex.getMessage());
 		return new ResponseEntity<BaseApiResponse>(new BaseApiResponse(Boolean.FALSE, ex.getMessage()),
 				HttpStatus.INTERNAL_SERVER_ERROR);
 	}

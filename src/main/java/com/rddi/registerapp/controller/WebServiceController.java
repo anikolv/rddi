@@ -7,9 +7,12 @@ import java.util.List;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -31,6 +34,8 @@ import com.rddi.registerapp.service.WebServiceManagement;
 @Controller
 @RequestMapping(value = "/ws")
 public class WebServiceController {
+	
+	Logger logger = LoggerFactory.getLogger(WebServiceController.class);
 	
 	@Autowired
 	private WebServiceManagement webServiceManagement;
@@ -95,5 +100,11 @@ public class WebServiceController {
 		response.setHeader("Content-Disposition", "attachment; filename=" + serverStubGenerationForm.getFramework() + "-server-generated.zip");
 		outStream.write(downloadedBytes);
 		outStream.flush();
+	}
+	
+	@ExceptionHandler(RuntimeException.class)
+	public String handleRuntimeException(RuntimeException ex) {
+		logger.error(ex.getMessage(), ex);
+		return "error";
 	}
 }

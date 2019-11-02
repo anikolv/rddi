@@ -5,9 +5,12 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.OptionalDouble;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -29,9 +32,11 @@ import com.rddi.registerapp.service.WebServiceManagement;
 @Controller
 public class HomeController {
 	
+	Logger logger = LoggerFactory.getLogger(HomeController.class);
+	
 	@Autowired
 	private WebServiceRepository webServiceRepository;
-	
+
 	@Autowired
 	private WebServiceManagement webServiceManagement;
 	
@@ -103,6 +108,12 @@ public class HomeController {
 		model.addAttribute("apiCreated", true);
 
 		return "index";
+	}
+	
+	@ExceptionHandler(RuntimeException.class)
+	public String handleRuntimeException(RuntimeException ex) {
+		logger.error(ex.getMessage(), ex);
+		return "error";
 	}
 
 }
