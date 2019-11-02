@@ -12,13 +12,11 @@
 		<link rel="import" href="/webjars/d3-progress-meter/d3-progress-meter.html">
 	</head>
 	<body>
-		<div class="jumbotron d-flex align-items-center min-vh-100 custom-layout">
+		<div class="jumbotron d-flex align-items-center min-vh-100 custom-layout no-bottom-padding">
 		  <div class="container text-center">
-		  
-		  
-		  <a href="/">
-		  	<img src="/images/FullColor_TextOnly_1024x1024_72dpi.jpg" class="img-fluid langing-logo bottom-margin">
-		  </a>
+			<a href="/">
+			  	<img src="/images/FullColor_TextOnly_1024x1024_72dpi.jpg" class="img-fluid langing-logo bottom-margin">
+			</a>
 		   	
 		   	<div class="card text-center">
 			  <div class="card-header">
@@ -61,8 +59,9 @@
 					  	<img class="icon-small bottom-margin" th:attr="src=${webService.serviceProvider.iconUrl}"  alt="Card image cap">
 					    <h3 class="card-title" th:text="${webService.name + ', version ' + webService.version}"></h3>
 					    <p class="card-text"><i th:text="${webService.description}"></i></p>
-					    <p class="card-text"><i th:text="${'Type: ' + webService.type.name}"></i></p>
-					    <p class="card-text"><i th:text="${'Domain: ' + webService.category.name}"></i></p>
+					    <p class="card-text"><i th:text="${'Deployment type: ' + webService.type.name}"></i></p>
+					    <p class="card-text"><i th:text="${'Category: ' + webService.category.name}"></i></p>
+					    <p class="card-text"><i th:text="${'Added: ' + webService.createdAt}"></i></p>
 				  	</div>
 				  	
 				  	<!-- Who provides it -->
@@ -76,30 +75,45 @@
 				  	
 				  	<!-- Evaluate it -->
 				  	<div class="content-panel еvaluate-panel" style="display:none;">
-				  		<h2 class="bottom-margin">
-				  			Status:
-				  			<span class="badge badge-success" th:if="${webServiceStatus.available}">Online</span>
-							<span class="badge badge-danger" th:if="${not webServiceStatus.available}">Offline</span>
-						</h2>
-						
-						<h2 class="bottom-margin">
-				  			Rating: 
-				  			<span th:if="${not averageRating.isPresent()}" class="badge badge-secondary">N/A</span>
-				  			
-							<span th:if="${averageRating.isPresent() and averageRating.getAsDouble() >= 4}" class="badge badge-success" 
-								  th:text="${#numbers.formatDecimal(averageRating.getAsDouble(), 1, 'DEFAULT', 1, 'DEFAULT') + ' / 5'}"></span>
-								  
-							 <span th:if="${averageRating.isPresent() and averageRating.getAsDouble() >= 2 and averageRating.getAsDouble() < 4}" class="badge badge-warning" 
-								  th:text="${#numbers.formatDecimal(averageRating.getAsDouble(), 1, 'DEFAULT', 1, 'DEFAULT') + ' / 5'}"></span>
-								  
-							<span th:if="${averageRating.isPresent() and averageRating.getAsDouble() < 2 }" class="badge badge-danger" 
-								  th:text="${#numbers.formatDecimal(averageRating.getAsDouble(), 1, 'DEFAULT', 1, 'DEFAULT') + ' / 5'}"></span>
-						</h2>
-						
-						<h2 class="bottom-margin">
-				  			Discussions: 
-				  			<span class="badge badge-info" th:text="${numberOfComments}"></span>
-						</h2>
+				  	
+					  	<div class="card-group status-group">
+					  		<div class="card border-dark mb-3" style="max-width: 18rem;">
+							  <div class="card-header">Status</div>
+							  <div class="card-body text-dark">
+							    <p class="card-text">
+							    	<span class="badge badge-success" th:if="${webServiceStatus.available}">Online</span>
+								<span class="badge badge-danger" th:if="${not webServiceStatus.available}">Offline</span>
+							    </p>
+							  </div>
+							</div>
+							
+							<div class="card border-dark mb-3" style="max-width: 18rem;">
+							  <div class="card-header">Rating</div>
+							  <div class="card-body text-dark">
+							    <p class="card-text">
+								    <span th:if="${averageRating.intValue() == 0}" class="badge badge-secondary rating">N/A</span>
+						  			
+									<span th:if="${averageRating != 0 and averageRating.intValue() >= 4}" class="badge badge-success rating" 
+										  th:text="${averageRating.intValue() + ' / 5'}"></span>
+										  
+									 <span th:if="${averageRating != 0 and averageRating.intValue() >= 2 and averageRating.intValue() < 4}" class="badge badge-warning rating" 
+										  th:text="${averageRating.intValue() + ' / 5'}"></span>
+										  
+									<span th:if="${averageRating != 0 and averageRating.intValue() < 2 }" class="badge badge-danger rating" 
+									  th:text="${averageRating.intValue() + ' / 5'}"></span>
+							    </p>
+							  </div>
+							</div>
+	
+							<div class="card border-dark mb-3" style="max-width: 18rem;">
+							  <div class="card-header">Discussions</div>
+							  <div class="card-body text-dark">
+							    <p class="card-text">
+							    	<span class="badge badge-info" th:text="${numberOfComments}"></span>
+							    </p>
+							  </div>
+							</div>
+					  	</div>
 						
 				  		<d3-progress-meter radius="100" th:attr="percentage=${lastMonthAvailabilityInPercentage/100}, current-text=${lastMonthAvailabilityInPercentage}" 
 				  		 	goal-text="%" type-text="Last month availability">
@@ -311,7 +325,17 @@
 				  	<input type="hidden" id="contract-url" th:value="${webService.openApiContract}"></input>
 				  	<input type="hidden" id="web-service-id" th:value="${webService.id}"></input>
 			  </div>
+			  
 			</div>
+			
+			<footer id="sticky-footer" class="py-4">
+			    <div class="container text-center">
+			      <small>
+			      	Copyright &copy; RestHub 2019 |
+			      	<a th:attr="href=${'/api/details/' + restHubWsId}">Check our API</a>
+			      </small>
+			    </div>
+			 </footer>
 			
 		  </div>
 		</div>

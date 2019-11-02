@@ -255,12 +255,16 @@ public class WebServiceManagementImpl implements WebServiceManagement {
 			ServiceProviderType serviceProviderType, String serviceProviderWebsite, String serviceProviderNameIconUrl,
 			String apiName, String apiShortDescription, String apiDescription, WebServiceCategory apiCategory,
 			WebServiceType apiType, String apiVersion, String apiDocUrl, String apiSpecUrl) throws IOException {
+		Date currentDate = new Date();
+		
 		ServiceProvider serviceProvider = new ServiceProvider();
 		serviceProvider.setName(serviceProviderName);
 		serviceProvider.setDescription(serviceProviderDescription);
 		serviceProvider.setType(serviceProviderType);
 		serviceProvider.setWebsite(serviceProviderWebsite);
 		serviceProvider.setIconUrl(serviceProviderNameIconUrl);
+		serviceProvider.setCreatedAt(currentDate);
+		
 
 		serviceProviderRepository.save(serviceProvider);
 
@@ -273,6 +277,7 @@ public class WebServiceManagementImpl implements WebServiceManagement {
 		webService.setVersion(apiVersion);
 		webService.setDocumentationUrl(apiDocUrl);
 		webService.setOpenApiContract(apiSpecUrl);
+		webService.setCreatedAt(currentDate);
 
 		webService.addServiceProvider(serviceProvider);
 

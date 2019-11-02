@@ -21,5 +21,7 @@ public interface WebServiceRepository extends JpaRepository<WebService, Long>, Q
 		   "FROM WebService ws " +
 		   "LEFT JOIN FETCH ws.httpStatuses s")
 	Boolean getWebServiceHttpStatus();
+	
+	WebService findByName(String name);
 
 }

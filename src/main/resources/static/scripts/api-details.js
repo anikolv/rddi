@@ -1,4 +1,5 @@
-$( document ).ready(function() {	 
+$( document ).ready(function() {
+	
    $('#rateMe1').mdbRate();
 	  
    $( ".nav-link" ).click(function() {

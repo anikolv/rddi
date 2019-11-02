@@ -9,6 +9,7 @@
 .icon-small {
 	width: 100px;
 	height: 100px;
+	margin-top: 5px;
 }
 
 .icon-smaller {
@@ -23,6 +24,10 @@
 .custom-layout {
 	margin: 0;
 	background-color: white;
+}
+
+.no-bottom-padding {
+	padding-bottom: 1px;
 }
 
 .custom-button {
@@ -150,4 +155,12 @@ div [class^="col-"]{
 }
 .card-item:hover::before, .card-item:hover::after, .card-item:focus::before, .card-item:focus::after {
   transform: scale3d(1, 1, 1);
+}
+
+.status-group {
+		margin-left: 100px;
+}
+
+#sticky-footer {
+  flex-shrink: none;
 }

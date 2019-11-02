@@ -11,7 +11,7 @@
 		<link rel="stylesheet" href="/css/styles.css" />
 	</head>
 	<body>
-		<div class="jumbotron d-flex align-items-center min-vh-100 custom-layout">
+		<div class="jumbotron d-flex align-items-center min-vh-100 custom-layout no-bottom-padding">
 		  <div class="container text-center">
 			  <a href="/">
 			  	<img src="images/FullColor_1024x1024_72dpi.jpg" class="img-fluid langing-logo bottom-margin">
@@ -196,7 +196,16 @@
 			      </div>
 			    </div>
 			  </div>
-			</div>	            
+			</div>	
+			
+			<footer id="sticky-footer" class="py-4">
+			    <div class="container text-center">
+			      <small>
+			      	Copyright &copy; RestHub 2019 |
+			      	<a th:attr="href=${'/api/details/' + restHubWsId}">Check our API</a>
+			      </small>
+			    </div>
+			 </footer>           
 			
 		  </div>
 		</div>

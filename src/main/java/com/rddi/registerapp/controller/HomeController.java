@@ -17,14 +17,12 @@ import com.rddi.registerapp.form.ClientSdkGenerationForm;
 import com.rddi.registerapp.form.ServerStubGenerationForm;
 import com.rddi.registerapp.form.WebServiceForm;
 import com.rddi.registerapp.form.WebServiceSearchForm;
-import com.rddi.registerapp.model.ServiceProvider;
 import com.rddi.registerapp.model.WebService;
 import com.rddi.registerapp.model.WebServiceComment;
 import com.rddi.registerapp.model.WebServiceStatus;
 import com.rddi.registerapp.model.enums.ServiceProviderType;
 import com.rddi.registerapp.model.enums.WebServiceCategory;
 import com.rddi.registerapp.model.enums.WebServiceType;
-import com.rddi.registerapp.repository.ServiceProviderRepository;
 import com.rddi.registerapp.repository.WebServiceRepository;
 import com.rddi.registerapp.service.WebServiceManagement;
 
@@ -33,9 +31,6 @@ public class HomeController {
 	
 	@Autowired
 	private WebServiceRepository webServiceRepository;
-	
-	@Autowired
-	private ServiceProviderRepository serviceProviderRepository;
 	
 	@Autowired
 	private WebServiceManagement webServiceManagement;
@@ -60,14 +55,16 @@ public class HomeController {
 		Double lastMonthAvailabilityInPercentage = webServiceManagement.getLastMonthAvailabilityInPercentage(webService);
 		Double reliabilityPercentage = webServiceManagement.getReliabilityInPercentage(webService);
 		OptionalDouble averageRating = webServiceManagement.getAverageWebServiceRating(webService);
+		WebService restHubWs = webServiceRepository.findByName("RestHub API");
 		List<WebServiceComment> comments = webServiceManagement.getWebServiceComments(webServiceId);
 		
 		model.addAttribute("webService", webService);
 		model.addAttribute("numberOfComments", comments.size());
+		model.addAttribute("restHubWsId", restHubWs.getId());
 		model.addAttribute("webServiceStatus", webServiceStatus);
 		model.addAttribute("lastMonthAvailabilityInPercentage", lastMonthAvailabilityInPercentage);
 		model.addAttribute("reliabilityPercentage", reliabilityPercentage);
-		model.addAttribute("averageRating", averageRating);
+		model.addAttribute("averageRating", averageRating.orElse(0));
 		model.addAttribute("clientSdkGenerationForm", new ClientSdkGenerationForm());
 		model.addAttribute("serverStubGenerationForm", new ServerStubGenerationForm());
 		
@@ -85,6 +82,9 @@ public class HomeController {
 	@GetMapping(value="/")
 	public String index(Model model) {
 		initModel(model);
+		
+		WebService restHubWs = webServiceRepository.findByName("RestHub API");
+		model.addAttribute("restHubWsId", restHubWs.getId());
 		
 		return "index";
 	}
