@@ -1,19 +1,12 @@
 package com.rddi.registerapp.service;
 
-import java.io.IOException;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import com.rddi.registerapp.model.WebService;
-import com.rddi.registerapp.model.WebServiceStatus;
 import com.rddi.registerapp.repository.WebServiceRepository;
 
 @Service

@@ -40,6 +40,16 @@ public class HomeController {
 	@Autowired
 	private WebServiceManagement webServiceManagement;
 	
+	@GetMapping(value="/")
+	public String index(Model model) {
+		initModel(model);
+		
+		WebService restHubWs = webServiceRepository.findByName("RestHub API");
+		model.addAttribute("restHubWsId", restHubWs.getId());
+		
+		return "index";
+	}
+	
 	@PostMapping(value="/search")
 	public String search(Model model, @ModelAttribute(value="webServiceSearchForm") WebServiceSearchForm webServiceSearchForm) {
 		List<WebService> webServices = webServiceManagement.searchWebServices(webServiceSearchForm.getSearchTerm(), webServiceSearchForm.getApiType(),
@@ -76,24 +86,6 @@ public class HomeController {
 		return "api-details";
 	}
 	
-	private void initModel(Model model) {
-		model.addAttribute("webServiceSearchForm", new WebServiceSearchForm());
-		model.addAttribute("webServiceForm", new WebServiceForm());
-		model.addAttribute("serviceProviderTypes", Arrays.asList(ServiceProviderType.values()));
-		model.addAttribute("webServiceCategories", Arrays.asList(WebServiceCategory.values()));
-		model.addAttribute("webServiceTypes",Arrays.asList(WebServiceType.values()));
-	}
-		
-	@GetMapping(value="/")
-	public String index(Model model) {
-		initModel(model);
-		
-		WebService restHubWs = webServiceRepository.findByName("RestHub API");
-		model.addAttribute("restHubWsId", restHubWs.getId());
-		
-		return "index";
-	}
-	
 	@PostMapping(value="/addApi")
 	public String addApi(@ModelAttribute(value = "webServiceForm") WebServiceForm webServiceForm, Model model)
 			throws IOException {
@@ -114,6 +106,14 @@ public class HomeController {
 	public String handleRuntimeException(RuntimeException ex) {
 		logger.error(ex.getMessage(), ex);
 		return "error";
+	}
+	
+	private void initModel(Model model) {
+		model.addAttribute("webServiceSearchForm", new WebServiceSearchForm());
+		model.addAttribute("webServiceForm", new WebServiceForm());
+		model.addAttribute("serviceProviderTypes", Arrays.asList(ServiceProviderType.values()));
+		model.addAttribute("webServiceCategories", Arrays.asList(WebServiceCategory.values()));
+		model.addAttribute("webServiceTypes",Arrays.asList(WebServiceType.values()));
 	}
 
 }

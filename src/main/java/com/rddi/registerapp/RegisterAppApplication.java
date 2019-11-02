@@ -33,7 +33,7 @@ public class RegisterAppApplication {
 	        return new ApiInfoBuilder().title("RestHub API")
 	            .description("RestHub REST API Interface")
 	            .license("RestHub license")
-	            .licenseUrl("http://www.apache.org/licenses/LICENSE-2.0.html")
+	            .licenseUrl("/")
 	            .version("1.0.0")
 	            .build();
 	 }

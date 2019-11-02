@@ -225,11 +225,8 @@ public class WebServiceManagementImpl implements WebServiceManagement {
 		if (webService.getServiceProvider().getWebsite() != null) {
 			reliabilityPoints++;
 		}
-		if (webService.getServiceProvider().getType() != null) {
-			reliabilityPoints++;
-		}
 		
-		Double reliabilityInPercentage = (Integer.valueOf(reliabilityPoints).doubleValue() / 3) * 100;
+		Double reliabilityInPercentage = (Integer.valueOf(reliabilityPoints).doubleValue() / 2) * 100;
 				
 		return reliabilityInPercentage;
 	}
