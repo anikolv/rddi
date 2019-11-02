@@ -11,21 +11,47 @@ import com.rddi.registerapp.model.enums.WebServiceCategory;
 import com.rddi.registerapp.model.enums.WebServiceType;
 import com.rddi.registerapp.service.WebServiceManagement;
 
+import io.swagger.annotations.ApiModelProperty;
+
 public class AddApiRequest {
 
+	@ApiModelProperty(example = "Service provider")
 	private String serviceProviderName;
+	
+	@ApiModelProperty(example = "Service provider description")
 	private String serviceProviderDescription;
+	
+	@ApiModelProperty(example = "BUSINESS_ORGANIZATION, SOFTWARE_FOUNDATION, PRIVATE_SERVICE_PROVIDER, OTHER")
 	private ServiceProviderType serviceProviderType;
+	
+	@ApiModelProperty(example = "gmail.com")
 	private String serviceProviderWebsite;
+	
+	@ApiModelProperty(example = "https://avatars3.githubusercontent.com/u/16343502?s=400&v=4")
 	private String serviceProviderNameIconUrl;
 
+	@ApiModelProperty(example = "Example API")
 	private String apiName;
+	
+	@ApiModelProperty(example = "Example API short description")
 	private String apiShortDescription;
+	
+	@ApiModelProperty(example = "Example API description")
 	private String apiDescription;
+	
+	@ApiModelProperty(example = "FINTECH, HEALTHCARE, WEATHER_AND_FORECASTS, TELCO, TRANSPORT, EDUCATION, UTILITIES, IT, OTHER")
 	private WebServiceCategory apiCategory;
+	
+	@ApiModelProperty(example = "SANDBOX, OFF_THE_SHELF")
 	private WebServiceType apiType;
+	
+	@ApiModelProperty(example = "1.0.0")
 	private String apiVersion;
+	
+	@ApiModelProperty(example = "API reference documentation URL")
 	private String apiDocUrl;
+	
+	@ApiModelProperty(example = "URL to the Swagger 2.0 or OpenAPI v3 specification in either JSON or YAML format")
 	private String apiSpecUrl;
 
 	public String getServiceProviderName() {
@@ -174,13 +200,15 @@ public class AddApiRequest {
 		ValidateContractResponse validationResponse = webServiceManagement
 				.validateWebServiceContract(apiSpecUrl);
 		
-		Optional<SchemaValidationMessage> schemaValidationMessage = 
-				validationResponse.getSchemaValidationMessages()
-				.stream().filter(message -> message.getLevel().equals("error"))
-				.findFirst();
-		
-		if (schemaValidationMessage.isPresent()) {
-			throw new ApiValidationException(schemaValidationMessage.get().getMessage());
+		if (validationResponse.getSchemaValidationMessages() != null) {
+			Optional<SchemaValidationMessage> schemaValidationMessage = 
+					validationResponse.getSchemaValidationMessages()
+					.stream().filter(message -> message.getLevel().equals("error"))
+					.findFirst();
+			
+			if (schemaValidationMessage.isPresent()) {
+				throw new ApiValidationException(schemaValidationMessage.get().getMessage());
+			}
 		}
 	}
 

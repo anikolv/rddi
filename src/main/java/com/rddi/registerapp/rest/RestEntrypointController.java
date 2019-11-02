@@ -33,8 +33,12 @@ import com.rddi.registerapp.model.enums.WebServiceType;
 import com.rddi.registerapp.repository.WebServiceRepository;
 import com.rddi.registerapp.service.WebServiceManagement;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+
 @RestController
 @RequestMapping(value = "/api")
+@Api(tags = "RestHub web API")
 public class RestEntrypointController {
 	
 	@Autowired
@@ -44,6 +48,7 @@ public class RestEntrypointController {
 	private WebServiceManagement webServiceManagement;
 	
 	@GetMapping(value="/search")
+	@ApiOperation(value = "Performs search against RestHub web services database")
 	public ResponseEntity<ApiSearchResponse> search(
 			@RequestParam("searchTerm") Optional<String> searchTerm,
 			@RequestParam("serviceProviderType") Optional<ServiceProviderType> serviceProviderType,
@@ -62,6 +67,7 @@ public class RestEntrypointController {
 	}
 	
 	@GetMapping(value="/details")
+	@ApiOperation(value = "Returns detailed web service information")
 	public ResponseEntity<ApiWebServiceDetailsResponse> apiDetails(@RequestParam("webServiceId") Long webServiceId) {
 		WebService webService = webServiceRepository.findById(webServiceId).orElse(null);
 		
@@ -79,6 +85,7 @@ public class RestEntrypointController {
 	}
 	
 	@PostMapping(value = "/create")
+	@ApiOperation(value = "Creates web service")
 	public ResponseEntity<ApiCreateResponse> addApi(@RequestBody AddApiRequest apiRequest)
 			throws IOException, ApiValidationException {
 		apiRequest.validate(webServiceManagement);
