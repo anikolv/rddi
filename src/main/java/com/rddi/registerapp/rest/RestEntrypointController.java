@@ -1,4 +1,4 @@
-package com.rddi.registerapp.controller;
+package com.rddi.registerapp.rest;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -30,7 +30,6 @@ import com.rddi.registerapp.model.WebServiceStatus;
 import com.rddi.registerapp.model.enums.ServiceProviderType;
 import com.rddi.registerapp.model.enums.WebServiceCategory;
 import com.rddi.registerapp.model.enums.WebServiceType;
-import com.rddi.registerapp.repository.ServiceProviderRepository;
 import com.rddi.registerapp.repository.WebServiceRepository;
 import com.rddi.registerapp.service.WebServiceManagement;
 
@@ -40,9 +39,6 @@ public class RestEntrypointController {
 	
 	@Autowired
 	private WebServiceRepository webServiceRepository;
-	
-	@Autowired
-	private ServiceProviderRepository serviceProviderRepository;
 	
 	@Autowired
 	private WebServiceManagement webServiceManagement;
