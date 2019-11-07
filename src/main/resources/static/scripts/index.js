@@ -22,10 +22,12 @@ $( document ).ready(function() {
 		      	   var error = schemaValidationMessages.find((element) => {
 		       		  return element.level == "error";
 		       		});
-		      	   $(".api-spec-error").text(error.message).show(); 
-		      	   
-		    	   $(".buttons-bar").show();
-		    	   $(".loader").hide();
+		      	   if (typeof error !== "undefined") {
+			      	   $(".api-spec-error").text(error.message).show(); 
+			      	   
+			    	   $(".buttons-bar").show();
+			    	   $(".loader").hide(); 
+		      	   }
 		       } else {
 		    	   $(".api-spec-error").text("").hide(); 
 		    	   $( ".add-api-form" ).submit();
