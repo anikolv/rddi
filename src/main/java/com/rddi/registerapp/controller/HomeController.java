@@ -44,9 +44,6 @@ public class HomeController {
 	public String index(Model model) {
 		initModel(model);
 		
-		WebService restHubWs = webServiceRepository.findByName("RestHub API");
-		model.addAttribute("restHubWsId", restHubWs.getId());
-		
 		return "index";
 	}
 	
@@ -109,6 +106,9 @@ public class HomeController {
 	}
 	
 	private void initModel(Model model) {
+		WebService restHubWs = webServiceRepository.findByName("RestHub API");
+		
+		model.addAttribute("restHubWsId", restHubWs.getId());
 		model.addAttribute("webServiceSearchForm", new WebServiceSearchForm());
 		model.addAttribute("webServiceForm", new WebServiceForm());
 		model.addAttribute("serviceProviderTypes", Arrays.asList(ServiceProviderType.values()));
