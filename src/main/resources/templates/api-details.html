@@ -315,8 +315,7 @@
 				  	
 				  	<!-- Learn it -->
 			  		<div class="content-panel doc-panel" style="display:none;">
-					    <iframe class="bottom-margin" th:if="${webService.documentationUrl != null}" th:attr="src=${webService.documentationUrl}" height="100%" width="100%" style="height: 600px;"></iframe>
-					    <a th:if="${webService.documentationUrl != null}" th:attr="href=${webService.documentationUrl}" class="btn btn-primary custom-button">Go to original website</a>
+					    <a th:if="${webService.documentationUrl != null}" th:attr="href=${webService.documentationUrl}" class="btn btn-primary custom-button">Reference documentation</a>
 					    <div th:if="${webService.documentationUrl == null}" class="alert alert-primary api-rated" role="alert">
  							No reference documentation available!
 						</div>
