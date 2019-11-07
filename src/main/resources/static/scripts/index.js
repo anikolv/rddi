@@ -22,7 +22,7 @@ $( document ).ready(function() {
 		       if (schemaValidationMessages != null) {
 		    	   var error = schemaValidationMessages[0];
 		    	   
-		    	   $(".api-spec-error").text(error.message).show(); 
+		    	   $(".api-spec-error").text("Validation error: " + error.message).show(); 
 		    	   $(".buttons-bar").show();
 		    	   $(".loader").hide(); 
 		       } else {
