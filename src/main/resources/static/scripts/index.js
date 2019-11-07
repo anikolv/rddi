@@ -16,18 +16,15 @@ $( document ).ready(function() {
 		 	$(".buttons-bar").hide();
 			$(".loader").show();
 			   
-		    $.get( "/ws/validate?contractUrl=" + contractUrl, function( data ) {			   
+		    $.get( "/ws/validate?contractUrl=" + contractUrl, function( data ) {
+		       var error = false;
 		   	   var schemaValidationMessages = data.schemaValidationMessages;
 		       if (schemaValidationMessages != null) {
-		      	   var error = schemaValidationMessages.find((element) => {
-		       		  return element.level == "error";
-		       		});
-		      	   if (typeof error !== "undefined") {
-			      	   $(".api-spec-error").text(error.message).show(); 
-			      	   
-			    	   $(".buttons-bar").show();
-			    	   $(".loader").hide(); 
-		      	   }
+		    	   var error = schemaValidationMessages[0];
+		    	   
+		    	   $(".api-spec-error").text(error.message).show(); 
+		    	   $(".buttons-bar").show();
+		    	   $(".loader").hide(); 
 		       } else {
 		    	   $(".api-spec-error").text("").hide(); 
 		    	   $( ".add-api-form" ).submit();

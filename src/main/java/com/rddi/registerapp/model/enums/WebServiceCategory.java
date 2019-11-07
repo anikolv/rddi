@@ -10,7 +10,8 @@ public enum WebServiceCategory {
 	EDUCATION("Education"),
 	UTILITIES("Utitilies"),
 	IT("Information technologies"),
-	OTHER("Other");
+	DEDICATED_SOFTWARE("Dedicated software"),
+	GOVERNMENTAL_SERVICES("Governmental services");
 	
 	private String name;
 

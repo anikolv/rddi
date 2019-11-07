@@ -55,6 +55,10 @@ $( document ).ready(function() {
 				   
 				   if (contactUrl.endsWith("json")) {
 					   editor.session.setMode("ace/mode/json");
+					   
+					   if (typeof data === 'string' || data instanceof String) {
+						   data = JSON.parse(data);
+					   }
 					   var jsonString = JSON.stringify(data, null, '\t');
 					   editor.setValue(jsonString);
 				   } else {
