@@ -10,6 +10,6 @@
     RestHub is intended to be open-source, free and community driven web interface and REST Api for sharing and finding RESTful
     web services for both service providers and service integrators
     <br /><br /><br />
-    <a href="https://github.com/othneildrew/Best-README-Template">View Demo</a>
+    <a href="http://ec2-34-209-175-216.us-west-2.compute.amazonaws.com:9090/">View Demo</a>
   </p>
 </p>
