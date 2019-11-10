@@ -9,14 +9,15 @@
 		<link rel="stylesheet" href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css" />
 		<link rel="stylesheet" href="/webjars/font-awesome/5.8.1/css/all.css" />
 		<link rel="stylesheet" href="/css/styles.css" />
+		<link rel="stylesheet" href="/css/rating.css" />
 	</head>
 	<body>
 		<div class="jumbotron d-flex align-items-center min-vh-100 custom-layout no-bottom-padding">
 		  <div class="container text-center">
 			  <a href="/">
 			  	<img src="images/FullColor_1024x1024_72dpi.jpg" class="img-fluid langing-logo bottom-margin">
-			  </a>
-			
+			  </a>			
+				
 			<!-- Search form -->
 			<form class="bottom-margin search-api-form" th:object="${webServiceSearchForm}" th:action="@{/search}"  method="post">
 				<div class="input-group mb-4 border search-field p-1">
@@ -70,9 +71,12 @@
 			<div class="cards-container" th:if="${webServicesList != null and not #lists.isEmpty(webServicesList)}">
 				 <div class="card card-item" th:each="webService : ${webServicesList}">
 				  	<img class="card-img-top icon-small" th:attr="src=${webService.serviceProvider.iconUrl}" alt="Card image cap">
+				  	<div class='rating_bar'>
+						<div  class='rating' th:attr="style='width:' + ${(webService.averageRating / 5) * 100 + '%'}"style='width:60%;'></div>
+					</div>
 				  	<div class="card-body">
 				    	<h5 class="card-title card-item-title" th:text="${webService.name}"></h5>
-				    	<p class="card-text card-item-text" th:text="${webService.shortDescription}">.</p>
+				    	<p class="card-text card-item-text" th:text="${webService.shortDescription}"></p>
 				    	<a th:attr="href=${'/api/details/' + webService.id}" class="btn custom-button">Check it out</a>
 			  		</div>
 				</div>

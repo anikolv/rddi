@@ -54,6 +54,11 @@ public class HomeController {
 		
 		initModel(model);
 		
+		webServices.forEach(ws -> {
+			OptionalDouble averageRating = webServiceManagement.getAverageWebServiceRating(ws);
+			ws.setAverageRating(averageRating.orElse(0));
+		});
+		
 		model.addAttribute("webServiceSearchForm", webServiceSearchForm);
 		model.addAttribute("webServicesList", webServices);
 		

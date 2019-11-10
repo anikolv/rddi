@@ -18,6 +18,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
@@ -84,6 +85,9 @@ public class WebService {
 	@JsonManagedReference
 	@OneToMany(mappedBy = "webService", orphanRemoval = true, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private Set<WebServiceRating> ratings = new LinkedHashSet<WebServiceRating>();
+	
+	@Transient
+	private Double averageRating;
 
 	public Long getId() {
 		return id;
@@ -215,4 +219,11 @@ public class WebService {
 		this.ratings = ratings;
 	}
 
+	public Double getAverageRating() {
+		return averageRating;
+	}
+
+	public void setAverageRating(Double averageRating) {
+		this.averageRating = averageRating;
+	}
 }

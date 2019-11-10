@@ -10,6 +10,7 @@
 	width: 100px;
 	height: 100px;
 	margin-top: 5px;
+	margin-bottom: 10px;
 }
 
 .icon-smaller {
@@ -105,7 +106,7 @@ div [class^="col-"]{
   transition:0.5s;
   cursor: default;
   width: 17rem; 
-  height: 18rem; 
+  height: 20rem; 
   margin-left: 76px;
   margin-right: 10px;
   margin-bottom: 10px;
