@@ -9,7 +9,7 @@ public class ApiWebServiceEvaluation {
 
 	private String webServiceStatus;
 	private Integer lastMonthAvailabilityInPercentage;
-	private Integer reliabilityPercentage;
+	private Integer customerSupportLevelPercentage;
 	private Integer averageRating;
 
 	public String getWebServiceStatus() {
@@ -29,11 +29,11 @@ public class ApiWebServiceEvaluation {
 	}
 
 	public Integer getReliabilityPercentage() {
-		return reliabilityPercentage;
+		return customerSupportLevelPercentage;
 	}
 
-	public void setReliabilityPercentage(Integer reliabilityPercentage) {
-		this.reliabilityPercentage = reliabilityPercentage;
+	public void setReliabilityPercentage(Integer customerSupportLevelPercentage) {
+		this.customerSupportLevelPercentage = customerSupportLevelPercentage;
 	}
 
 	public Integer getAverageRating() {
