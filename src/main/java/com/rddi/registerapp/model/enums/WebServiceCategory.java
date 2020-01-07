@@ -2,16 +2,22 @@ package com.rddi.registerapp.model.enums;
 
 public enum WebServiceCategory {
 	
-	FINTECH("Finances"), 
-	HEALTHCARE("Healthcare and pharmacy"),
-	WEATHER_AND_FORECASTS("Weather and forecasts"),
-	TELCO("Telecommunications"),
-	TRANSPORT("Transport"),
-	EDUCATION("Education"),
-	UTILITIES("Utitilies"),
-	IT("Information technologies"),
-	DEDICATED_SOFTWARE("Dedicated software"),
-	GOVERNMENTAL_SERVICES("Governmental services");
+	ADVERTISING("Advertising"), 
+	COMMUNICATIONS("Communications"), 
+	CREATIVE("Creative"), 
+	ENTERTAIMENT("Entertaiment"), 
+	FASHON("Fashion"), 
+	HOSPITALITY("Hospitality"), 
+	IT("IT"), 
+	MANUFACTURING("Manufacturing"), 
+	MEDIA("Media"), 
+	ROBOTICS("Robotics"), 
+	TELECOM("Telecom"), 
+	AGRICULTURE("Agriculture"), 
+	EDUCATION("Education"), 
+	FARMING("Farming"), 
+	FINANCE("Finance"), 
+	INFRASTRUCTURE("Infrastructure");
 	
 	private String name;
 

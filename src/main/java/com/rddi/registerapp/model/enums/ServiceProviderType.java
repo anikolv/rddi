@@ -2,10 +2,20 @@ package com.rddi.registerapp.model.enums;
 
 public enum ServiceProviderType {
 	
-	BUSINESS_ORGANIZATION("Business organization"), 
+	CORPORATION("Corporation"),
+	JOIN_STOCK_COMPANY("Join stock company"), 
+	REAL_ESTATE_INVESTMENT_TRUST("Real estate investment trust"), 
+	SOLE_PROPRIETORSHIP("Sole proprietorship"),
+	LTD("Ltd"),
+	LIMITED_PARTNERSHIP("Limited partnership"),
+	GENERAL_PARTNERSHIP("General partnership"),
+	CHARITED_COMPANY("Charited company"),
+	STATUTORY_COMPANY("Statutory company"),
+	HOLDING_COMPANY("Holding company"),
+	SUBSIDIARY_COMPANY("Subsidiary company"),
+	ONE_MAN_COMPANY("One man company"),
 	GOVERNMENTAL_ORGANIZATION("Governmental organization"),
-	SOFTWARE_FOUNDATION("Software foundation"),
-	PRIVATE_SERVICE_PROVIDER("Private service provider");
+	NON_GOVERNMENTAL_ORGANIZATION("Non-governmental organization");
 	
 	private String name;
 
