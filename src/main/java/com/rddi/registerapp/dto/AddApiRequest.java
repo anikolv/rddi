@@ -2,6 +2,7 @@ package com.rddi.registerapp.dto;
 
 import java.util.Optional;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.util.StringUtils;
 
 import com.rddi.registerapp.dto.ValidateContractResponse.SchemaValidationMessage;
@@ -210,6 +211,12 @@ public class AddApiRequest {
 				throw new ApiValidationException(schemaValidationMessage.get().getMessage());
 			}
 		}
+	}
+	
+	public static AddApiRequest from(AddApiRequest from) {
+		AddApiRequest to = new AddApiRequest();
+		BeanUtils.copyProperties(from, to);
+		return to;
 	}
 
 }
