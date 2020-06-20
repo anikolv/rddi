@@ -9,7 +9,7 @@
 		<link rel="stylesheet" href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css" />
 		<link rel="stylesheet" href="/webjars/font-awesome/5.8.1/css/all.css" />
 		<link rel="stylesheet" href="/css/styles.css" />
-		<link rel="import" href="/webjars/d3-progress-meter/d3-progress-meter.html">
+		<link rel="stylesheet" href="/css/circle.css" />
 	</head>
 	<body>
 		<div class="jumbotron d-flex align-items-center min-vh-100 custom-layout no-bottom-padding">
@@ -114,14 +114,29 @@
 							  </div>
 							</div>
 					  	</div>
-						
-				  		<d3-progress-meter radius="100" th:attr="percentage=${lastMonthAvailabilityInPercentage/100}, current-text=${lastMonthAvailabilityInPercentage}" 
-				  		 	goal-text="%" type-text="Last month availability">
-				  		</d3-progress-meter>
-				  		
-				  		<d3-progress-meter radius="100" th:attr="percentage=${reliabilityPercentage/100}, current-text=${reliabilityPercentage}" 
-				  		 	goal-text="%" type-text="Customer support">
-				  		</d3-progress-meter>
+					  	<div class="row">
+					  		<div class="col-md-1">
+					  			<div style="margin-left:300px;"
+								  	id="last-month-availability-progress" 
+								  	th:attr="percentage=${lastMonthAvailabilityInPercentage}">
+						  		</div>
+					  		</div>
+					  		<div class="col-md-1">
+					  			<div style="margin-left:600px;"
+								  	id="customer-support-progress" 
+								  	th:attr="percentage=${reliabilityPercentage}">
+						  		</div>
+					  		</div>
+					  	</div>
+					  	
+					  	<div class="row">
+					  		<div class="col-md-6">
+					  			<span style="margin-left: 170px;"><b>LAST MONTH AVAILABILITY</b></span>
+					  		</div>
+					  		<div class="col-md-6">
+					  			<span style="margin-right: 170px;"><b>CUSTOMER SUPPORT</b></span>
+					  		</div>
+					  	</div>
 				  	</div>
 				  	
 				  	<!-- Play with it -->
@@ -349,4 +364,5 @@
 		<script type="text/javascript" src="/rating-scripts/rating.js" charset="utf-8"></script>
 		<script type="text/javascript" src="/jquery-cookie-scripts/jquery.cookie.js" charset="utf-8"></script>
 		<script type="module" src="/rapidoc-scripts/rapidoc-min.js"></script>
+		<script type="text/javascript" src="/scripts/progress-circle.js"></script>
 	</body>

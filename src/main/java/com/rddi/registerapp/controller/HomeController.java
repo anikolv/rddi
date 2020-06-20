@@ -69,8 +69,8 @@ public class HomeController {
 	public String apiDetails(@PathVariable("webServiceId") Long webServiceId, Model model) {
 		WebService webService = webServiceRepository.findById(webServiceId).orElse(null);
 		WebServiceStatus webServiceStatus = webServiceManagement.getLastWebServiceStatus(webService);
-		Double lastMonthAvailabilityInPercentage = webServiceManagement.getLastMonthAvailabilityInPercentage(webService);
-		Double reliabilityPercentage = webServiceManagement.getReliabilityInPercentage(webService);
+		Integer lastMonthAvailabilityInPercentage = webServiceManagement.getLastMonthAvailabilityInPercentage(webService);
+		Integer reliabilityPercentage = webServiceManagement.getReliabilityInPercentage(webService);
 		OptionalDouble averageRating = webServiceManagement.getAverageWebServiceRating(webService);
 		WebService restHubWs = webServiceRepository.findByName("RestHub API");
 		List<WebServiceComment> comments = webServiceManagement.getWebServiceComments(webServiceId);

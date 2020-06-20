@@ -1,5 +1,4 @@
 $( document ).ready(function() {
-	
    $('#rateMe1').mdbRate();
 	  
    $( ".nav-link" ).click(function() {
@@ -30,8 +29,26 @@ $( document ).ready(function() {
 		}
 	   
 	   if ($(this).hasClass('evaluate-navbar')) {
-			  $('.content-panel').hide();
-			  $('.еvaluate-panel').show();
+		   
+		   var lmap = $('#last-month-availability-progress').attr('percentage');
+		   var csp = $('#customer-support-progress').attr('percentage');
+		   
+		   $('#last-month-availability-progress').progressCircle({
+			   nPercent        : lmap,
+			   showPercentText :true,
+			   circleSize      : 100,
+			   thickness       : 3
+			   });
+		   
+		   $('#customer-support-progress').progressCircle({
+			   nPercent        : csp,
+			   showPercentText :true,
+			   circleSize      : 100,
+			   thickness       : 3
+			   });
+		   
+		   $('.content-panel').hide();
+		   $('.еvaluate-panel').show();
 		}
 	   
 	   if ($(this).hasClass('integrate-navbar')) {

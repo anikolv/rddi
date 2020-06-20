@@ -78,8 +78,8 @@ public class RestEntrypointController {
 		ApiWebServiceDetails apiWebService = ApiWebServiceDetails.from(webService);
 		
 		WebServiceStatus webServiceStatus = webServiceManagement.getLastWebServiceStatus(webService);
-		Double lastMonthAvailabilityInPercentage = webServiceManagement.getLastMonthAvailabilityInPercentage(webService);
-		Double reliabilityPercentage = webServiceManagement.getReliabilityInPercentage(webService);
+		Integer lastMonthAvailabilityInPercentage = webServiceManagement.getLastMonthAvailabilityInPercentage(webService);
+		Integer reliabilityPercentage = webServiceManagement.getReliabilityInPercentage(webService);
 		OptionalDouble averageRating = webServiceManagement.getAverageWebServiceRating(webService);
 		
 		apiWebService.addEvaluationDetails(webServiceStatus, lastMonthAvailabilityInPercentage, reliabilityPercentage, averageRating.orElse(0));

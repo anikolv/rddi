@@ -154,12 +154,12 @@ public class ApiWebServiceDetails {
 		return to;
 	}
 	
-	public void addEvaluationDetails(WebServiceStatus webServiceStatus, Double lastMonthAvailabilityInPercentage,
-			Double reliabilityPercentage, Double averageRating) {
+	public void addEvaluationDetails(WebServiceStatus webServiceStatus, Integer lastMonthAvailabilityInPercentage,
+			Integer reliabilityPercentage, Double averageRating) {
 		ApiWebServiceEvaluation to = new ApiWebServiceEvaluation();
 		to.setAverageRating(averageRating.intValue());
-		to.setLastMonthAvailabilityInPercentage(lastMonthAvailabilityInPercentage.intValue());
-		to.setReliabilityPercentage(reliabilityPercentage.intValue());
+		to.setLastMonthAvailabilityInPercentage(lastMonthAvailabilityInPercentage);
+		to.setReliabilityPercentage(reliabilityPercentage);
 		to.setWebServiceStatus(webServiceStatus.getAvailable() ? "ONLINE" : "OFFLINE");
 		
 		this.setEvaluationDetails(to);

@@ -201,7 +201,7 @@ public class WebServiceManagementImpl implements WebServiceManagement {
 	}
 	
 	@Override
-	public Double getLastMonthAvailabilityInPercentage(WebService webService) {
+	public Integer getLastMonthAvailabilityInPercentage(WebService webService) {
 		Date lastMonthDate = new DateTime().minusMonths(1).toDate();
 		List<WebServiceStatus> statuses = webServiceStatusRepository.findByWebServiceAndCheckedAtAfter(webService,
 				lastMonthDate);
@@ -213,11 +213,11 @@ public class WebServiceManagementImpl implements WebServiceManagement {
 		
 		Double lastMonthAvailabilityPercentage = (Long.valueOf(failedChecks).doubleValue() / statuses.size()) * 100;
 				
-		return lastMonthAvailabilityPercentage;
+		return lastMonthAvailabilityPercentage != null ? lastMonthAvailabilityPercentage.intValue() : 0;
 	}
 	
 	@Override
-	public Double getReliabilityInPercentage(WebService webService) {
+	public Integer getReliabilityInPercentage(WebService webService) {
 		int reliabilityPoints = 0;
 		if (webService.getDocumentationUrl() != null) {
 			reliabilityPoints++;
@@ -228,7 +228,7 @@ public class WebServiceManagementImpl implements WebServiceManagement {
 		
 		Double reliabilityInPercentage = (Integer.valueOf(reliabilityPoints).doubleValue() / 2) * 100;
 				
-		return reliabilityInPercentage;
+		return reliabilityInPercentage != null ? reliabilityInPercentage.intValue() : 0;
 	}
 	
 	@Override
